@@ -2,21 +2,21 @@ package blatt01;
 
 public class Haendler {
     public static void main(String[] args) {
-        int sdpreisnormal = 5;
-        int sdpreismini = 8;
-        int sdpreismicro = 12;
+        int sd = 5;
+        int minisd = 8;
+        int microsd = 12;
 
-        int bestellmengenormal = 9;
-        int bestellmengemini = 5;
-        int bestellmengemicro = 0;
+        int mengesd = 9;
+        int mengeminisd = 5;
+        int mengemicrosd = 0;
 
-        int preisgesamt = sdpreisnormal * bestellmengenormal + sdpreismini * bestellmengemini + sdpreismicro * bestellmengemicro;
+        int preisgesamt = sd * mengesd + minisd * mengeminisd + microsd * mengemicrosd;
 
-        System.out.println("Der Preis für...");
-        System.out.println(bestellmengenormal + "normale SD-Karten\n" + bestellmengemini + "MiniSD-Karten\n" + bestellmengemicro + "MicroSD-Karten");
-        System.out.println("...lautet " + preisgesamt + "€");
+        System.out.println("Der Preis für...\n" + mengesd + " normale SD-Karten\n" + mengeminisd + " MiniSD-Karten\n" + mengemicrosd + " MicroSD-Karten\n" + "...lautet " + preisgesamt + "€");
     }
 }
-//Zus. Frage 1: theoretisch nur 6, man könnte die rechnung des gesamtpreises in die printlinie schreiben, wäre aber unübersichtlich
-//Zus. Frage 2: solange die Preise glatt sind int, sollten sie dies nicht sein, double
-//Zus. Frage 3: den Kunden könnten zu hohe Preise berechnet werden, oder viel schlimmer zu niedrige
+/*
+1. Man benötigt eigentlich nur 6, da man die Rechnung auch direkt in der Print-Ausgabe verbauen könnte, dies wurde hier aus übersichtsgründen nicht angewendet.
+2. Wenn es bei glatten Preisen bleibt, ist wie in diesem Fall der Int-Datentyp aufgrund der effizenteren Speicherung der praktischste, bei unglatten Zahlen wäre double der beste.
+3. Es könnte durch einen Fehler im Code ein zu hoher oder - gott bewahre, ein zu niedriger Preis berechnet werden.
+ */

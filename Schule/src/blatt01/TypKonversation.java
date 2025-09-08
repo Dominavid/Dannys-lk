@@ -19,15 +19,16 @@ public class TypKonversation {
 
         System.out.println(g);
         System.out.println(h);
-
-        /*boolean t = true;
-        h = (char) t;*/
+        /*
+        boolean t = true;
+        h = (char) t;
+         */
     }
 }
 /*
-a) es sind einige zusammenhangslose werte die vorher durch verschiedene arten von variablen gejagt wurden, und dadurch teilweise daten verloren ingen
-b) der wert in int wurde zu double, und der wert in double zu int
-c) int verbraucht weniger speicher, wodurch es immer dann genutzt werden sollte wenn es um ganze zahlen geht, aber double kann auch dezimalbrüche speichern. Bei double zu int gehen nachkommastellen verloren.
-d) char beschreibt buchstaben und int zahlen, bei umwandlungen wird die stelle im alphabeth genutzt
-e) es funktioniert nicht, da man eine wahrheitsangabe unmöglich zu einem buchstaben machen kann.
-*/
+a) das Programm gibt Variablen aus, die Vorher durch verschiedene Datentypen gejagt wurden, wodurch teils Daten verloren gingen.
+b) aus einem Dezimalbruch wurde eine glatte Zahl und umgekehrt, was in ersterem Fall die Gefahr birgt, dass Nachkommastellen verloren gehen.
+c) int ist eine glatte Zahl, die effizient gespeichert wird, aber nicht die Möglichkeit hat Dezimalbrüche zu speichern, während es bei double genau andersrum ist.
+d) char ist ein Buchstabe, der sich im Falle einer Umwandlung zu/von einer zahl auf die Stelle im Alphabet bezieht, was bei Zahlen höher als 26 wieder von vorne zählt, ähnlich wie beim schriftlichen erstellen von Bildern.
+e) es entsteht eine Fehlermeldung, da ein Wahrheitswert nicht logisch zu einem Buchstaben werden kann.
+ */
