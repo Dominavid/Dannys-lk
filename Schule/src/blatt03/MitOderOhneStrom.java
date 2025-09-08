@@ -46,7 +46,7 @@ public class MitOderOhneStrom {
                 } else { //strom an,aus
                     System.out.println("In diesem Fall wird das Gatter ein Signal abgeben, Sir.");
                 }
-            } else {//strom aus
+            } else { //strom aus
                 System.out.println("Und der zweite Eingang? (true/false)");
                 if (sc.nextBoolean()) { //strom aus,an
                     System.out.println("In diesem Fall wird das Gatter ein Signal abgeben, Sir.");
