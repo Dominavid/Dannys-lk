@@ -1,7 +1,7 @@
 package blatt04;
 
 public class etf {
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         double sparrate = 50;
         double gesamtcash;
         double gewinn = 0.06;
@@ -19,5 +19,5 @@ public class etf {
             }
         }
         System.out.println("Gesamtcash: " + gesamtcash + "\nMonat: " + monat + "\n");
-    }
+    }*/
 }
