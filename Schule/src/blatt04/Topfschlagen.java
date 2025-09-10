@@ -9,36 +9,40 @@ public class Topfschlagen {
         Random rand = new Random();
         int topfx = rand.nextInt(10) + 1;
         int topfy = rand.nextInt(10) + 1;
+        int topfz = rand.nextInt(10) + 1;
         int spielerx = 5;
         int spielery = 5;
-        int distanzalt = 0;
+        int spielerz = 5;
+        int distanzalt = Math.abs(spielerx - topfx) + Math.abs(spielery - topfy) + Math.abs(spielerz - topfz);
         int distanzneu = 0;
         char bewegung;
 
         while (true) {
-            System.out.println("Wohin planen Euer Exzellenz zu gehen? (W/A/S/D)");
+            System.out.println("Wohin planen Euer Exzellenz zu gehen? (W/A/S/D/Q/E)");
             bewegung = input.next().toUpperCase().charAt(0);
             if (bewegung == 'W') {
-                spielery++;
+                spielerz++;
             } else if (bewegung == 'A') {
                 spielerx--;
             } else if (bewegung == 'S') {
-                spielery--;
+                spielerz--;
             } else if (bewegung == 'D') {
                 spielerx++;
-            }
+            } else-if (bewegung == 'Q') {}
             if (spielerx == topfx && spielery == topfy) {
                 System.out.println("SAUFEEEEEEN!");
                 break;
             }
 
             distanzneu = Math.abs(spielery - topfy) +  Math.abs(spielerx - topfx);
-            if (distanzneu < distanzalt) {
-                System.out.println("Warm");
-            } else if (distanzneu > distanzalt) {
-                System.out.println("Kalt");
-            } else {
-                System.out.println("Lauwarm");
+            if (distanzalt != 0) {
+                if (distanzneu < distanzalt) {
+                    System.out.println("Warm");
+                } else if (distanzneu > distanzalt) {
+                    System.out.println("Kalt");
+                } else {
+                    System.out.println("Lauwarm");
+                }
             }
             distanzalt = distanzneu;
 
