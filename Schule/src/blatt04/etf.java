@@ -13,6 +13,7 @@ public class etf {
         double anteil = 0;
         int monat = 0;
         int jahr = 1;
+        boolean weitermache = true;
 
         System.out.println("Über wie viele Jahre planen Euer Exzellenz zu investieren?");
         int laufzeit = input.nextInt();
@@ -38,12 +39,16 @@ public class etf {
                 if (ziel) {
                     if (anteil >= zielanteil) {
                         System.out.println("Das Anteilziel wurde erreicht, Sir");
+                        weitermache = false;
                         break;
                     }
                 }
             }
             jahr += 1;
             monat = 0;
+            if (!weitermache) {
+                break;
+            }
         }
 
 
