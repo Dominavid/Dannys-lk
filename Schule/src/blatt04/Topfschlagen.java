@@ -20,8 +20,10 @@ public class Topfschlagen {
         char bewegung;
 
         while (true) {
-            System.out.println("Wohin planen Euer Exzellenz zu gehen? (W/A/S/D/Q/E)");
+            System.out.println("Wohin planen Euer Exzellenz zu gehen? (W/A/S/D/Q/E/Y/X)");
             bewegung = input.next().toUpperCase().charAt(0);
+
+//Verarbeitung eingabe
             if (bewegung == 'W') {
                 spielerz++;
             } else if (bewegung == 'A') {
@@ -32,9 +34,14 @@ public class Topfschlagen {
                 spielerx++;
             } else if (bewegung == 'Q') {
                 spielery++;
-            } else if (bewegung == 'E' {
+            } else if (bewegung == 'E') {
                 spielery--;
-            }
+            } else if (bewegung == 'Y') {
+				spielert++;
+			} else if (bewegung == 'X') {
+				spielert--;
+			}
+
             if (spielerx == topfx && spielery == topfy && spielerz == topft && spielert) {
                 System.out.println("SAUFEEEEEEN!");
                 break;
