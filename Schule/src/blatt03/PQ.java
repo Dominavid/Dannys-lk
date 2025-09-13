@@ -13,8 +13,8 @@ public class PQ {
             System.out.println("Bitte keine negativen Zahlen, Sir.");
             System.exit(0);
         }
-
-        double x1 = -p/q + Math.sqrt((p/2) * (p/2) - q);
+        double x1nervt = (p/2) * (p/2) - q;
+        double x1 = -p/q + Math.sqrt(x1nervt);
         double x2 = -p/q - Math.sqrt((p/2) * (p/2) - q);
 
         System.out.printf("x1 beträgt %f und x2 beträgt %f, Sir.", x1, x2);

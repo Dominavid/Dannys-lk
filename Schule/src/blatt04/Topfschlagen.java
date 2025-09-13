@@ -7,6 +7,38 @@ public class Topfschlagen {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Random rand = new Random();
+
+        System.out.println("4D-Topfschlagen");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("initiieren");
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("initiieren.");
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("initiieren..");
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("initiieren...");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         int topfx = rand.nextInt(10) + 1;
         int topfy = rand.nextInt(10) + 1;
         int topfz = rand.nextInt(10) + 1;
@@ -42,7 +74,7 @@ public class Topfschlagen {
 				spielert--;
 			}
 
-            if (spielerx == topfx && spielery == topfy && spielerz == topft && spielert) {
+            if (spielerx == topfx && spielery == topfy && spielerz == topfz &&  topft == spielert) {
                 System.out.println("SAUFEEEEEEN!");
                 break;
             }
