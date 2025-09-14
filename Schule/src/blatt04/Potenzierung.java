@@ -14,7 +14,6 @@ public class Potenzierung {
         int sooftgerechnet = 0;
         double ergebnis = basis;
         if (exponent <= 0) { //abfangen von nicht natürlichen Exponenten
-            System.out.println("Eigentlich sind nur natürliche Exponenten gewünscht, Sir. Dieses Mal machen wir aber eine Ausnahme, weil der Ersteller Lust hatte sich unnötige Arbeit zu machen und Verarbeitung für negative Exponenten einzubauen.\nBedenken Sie allerdings, dass das Ergebnis auf zwei Nachkommastellen gekürzt wird, und es daher gut möglich ist, dass sehr kleine Zahlen als 0 angezeigt werden.\n");
             while (sooftgerechnet <= Math.abs(exponent)) { //ausrechnen von rechnungen mit 0 oder weniger als exponent
                 ergebnis /= basis;
                 sooftgerechnet++;

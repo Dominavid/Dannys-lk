@@ -1,9 +1,11 @@
 package blatt04;
 
+//Ich hoffe, dass das auch der Aufgabenstellung entspricht, da wir es so im Unterricht gemacht haben
+
 import java.util.Random;
 import java.util.Scanner;
 
-public class etf {
+public class ETF {
     public static void main(String[] args) {
         Random rnd = new Random();
         Scanner input = new Scanner(System.in);
