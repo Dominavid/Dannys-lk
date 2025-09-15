@@ -34,4 +34,4 @@ public class Zeitumrechner {
 }
 
 // b) Da es für jeden Tag, jede Stunde und jede Minute je einmal durch eine Schleife muss, sind es bei mir 169 Durchläufe
-// c) Eventuell ist es möglich, die Anzahl zu verringern, falls man die Rechnung mit Divisionen löst, dort müsste man aber mit Resten arbeiten, wenn man es reduzieren will. Da ich aber nicht das Verlangen spüre, herauszufinden, ob Divisionen mit Resten überhaupt möglich sind, belasse ich es bei meiner Lösung.
+// c) Eventuell ist es möglich, die Anzahl zu verringern, falls man die Rechnung mit Divisionen löst, dort müsste man aber mit Resten arbeiten, wenn man es reduzieren will. Da ich aber nicht das Verlangen spüre, herauszufinden, ob Divisionen mit Resten überhaupt möglich sind, belasse ich es bei meiner Lösung. (Man könnte die Division mit Rest auch über eine Schleife lösen, das würde aber die Anzahl der Rechenoperationen nicht verringern.
