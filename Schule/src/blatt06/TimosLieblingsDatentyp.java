@@ -16,9 +16,9 @@ public class TimosLieblingsDatentyp {
                 System.exit(0);
             }
             if (noten[i] > 3) {
-                System.out.println("Was ein Dödel!\n");
+                System.out.println("Was ein Dödel!\n\n");
             } else {
-                System.out.println("So ein fähiger Mann!\n");
+                System.out.println("So ein fähiger Mann!\n\n");
             }
         }
     }
