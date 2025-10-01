@@ -155,21 +155,78 @@ public class ArbeitMitArrays {
     }
 
 
-
+    /**
+     * das war schwieriger als es hätte sein sollen
+     * @param arr
+     * @return
+     */
     public static int[] shiftLeft(int[] arr) {
-        int temp = arr[0];
-        arr[0] = arr[i + 1];
-        for (int i = 0; i < arr.length - 1; i++) {
-
+        int temp = arr[arr.length - 1];
+        arr[arr.length - 1] = arr[0];
+        for (int i = 0; i < arr.length - 2; i++) {
+            arr[i] = arr[i + 1];
         }
+        arr[arr.length - 2] = temp;
+        return arr;
+    }
+
+    /**
+     * das hab ich unnötigerweise gemacht glaub ich
+     * @param arr
+     * @return
+     */
+    public static int[] shiftRight(int[] arr) {
+        int temp = arr[0];
+        arr[0] = arr[arr.length - 1];
+        for (int i = arr.length - 1; i > 1; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[1] = temp;
+        return arr;
     }
 
 
+    /**
+     * immerhin eine Sache die heute schön schnell geht
+     * @param arr
+     * @return
+     */
+    public static int[] shiftLeftAbsolute(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        arr[arr.length - 1] = 0;
+        return arr;
+    }
+
+
+    /**
+     * auch ganz nett...
+     * @param arr
+     * @return
+     */
+    public static int[] shiftRightAbsolute(int[] arr) {
+        for (int i = arr.length - 1; i > 0; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[0] = 0;
+        return arr;
+    }
+
+
+
+
+
+
     public static void main(String[] args) {
-        int[] arr1 = {5,4,3,2,1};
-        int[] arr2 = {5,4,3,5,1,3,53,53,765,1};
+        int[] arr1 = {1,2,3,4,5};
+        int[] arr2 = {3,8,11,21,46};
         printArray(arr1);
+        printArray(shiftLeft(arr1));
+        //printArray(shiftLeftAbsolute(arr1));
         printArray(arr2);
+        printArray(shiftRight(arr2));
+        //printArray(shiftRightAbsolute(arr2));
         boolean sortiert1 = istSortiert(arr1);
         boolean sortiert2 = istSortiert(arr2);
         System.out.println("\n\n1 ist sortiert? " + sortiert1 + "\n2 ist sortiert? " + sortiert2 + "\n\n\n\n\nHier kommt das addierte:");
