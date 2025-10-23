@@ -14,7 +14,7 @@ public class Rechner {
     }
 
     /**
-     * Addieren... das könnte ich vielleicht in der *zählt angespannt mit den Fingern* ach egal
+     * Addieren... das konnte ich vielleicht in der *zählt angespannt mit den Fingern* ach egal
      * @param a Zahl 1
      * @param b Zahl 2
      * @return
