@@ -5,8 +5,8 @@ public class Stein {
 
     /**
      * ist zwar falsch hab aber zumindest die Regeln aus der Aufgabe erfüllt
-     * @param a
-     * @param b
+     * @param a die erste Zahl für die ein gemeinsamer Teiler mit der zweiten Zahl gesucht wird
+     * @param b die zweite Zahl für die ein gemeinsamer Teiler mit der ersten Zahl gesucht wird
      * @return
      */
     public static double steinGGT (int a, int b) {

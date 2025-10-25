@@ -4,7 +4,7 @@ public class ArbeitMitArrays {
 
     /**
      * int-Arrays werden gedruckt
-     * @param arr
+     * @param arr Array der geprintet (oder geprinted?) wird
      */
     public static void printArray(int[] arr) {
         System.out.print("[ ");
@@ -20,7 +20,7 @@ public class ArbeitMitArrays {
 
     /**
      * double-Arrays werden gedruckt
-     * @param arr
+     * @param arr Array der geprintet (oder geprinted?) wird
      */
     public static void printArray(double[] arr) {
         System.out.print("[ ");
@@ -36,7 +36,7 @@ public class ArbeitMitArrays {
 
     /**
      * die kommentare werden langsam repetetiv...
-     * @param arr
+     * @param arr Array der geprintet (oder geprinted?) wird
      */
     public static void printArray(boolean[] arr) {
         System.out.print("[ ");
@@ -52,7 +52,7 @@ public class ArbeitMitArrays {
 
     /**
      * richtig sinnvoll hier überall einen kommentar zu zu schreiben
-     * @param arr
+     * @param arr Array der geprintet (oder geprinted?) wird
      */
     public static void printArray(char[] arr) {
         System.out.print("[ ");
@@ -68,7 +68,7 @@ public class ArbeitMitArrays {
 
     /**
      * mir kommt eine idee zu einem java update...
-     * @param arr
+     * @param arr Array der geprintet (oder geprinted?) wird
      */
     public static void printArray(String[] arr) {
         System.out.print("[ ");
@@ -84,8 +84,8 @@ public class ArbeitMitArrays {
 
     /**
      * jetzt wird gecheckt ob der mist sortiert ist
-     * @param arr
-     * @return
+     * @param arr Array der geprüft wird
+     * @return Wahrheitswert der sagt ob der Array sortiert ist
      */
     public static boolean istSortiert(int[] arr) {
         Boolean aufsteigend = null;
@@ -121,9 +121,9 @@ public class ArbeitMitArrays {
 
     /**
      * jetzt wird addiert
-     * @param arr1
-     * @param arr2
-     * @return
+     * @param arr1 erster Array
+     * @param arr2 zweiter Array
+     * @return Ergebnis der Addition
      */
     public static int[] add(int[] arr1, int[] arr2) {
         int länge = 0;
@@ -157,8 +157,8 @@ public class ArbeitMitArrays {
 
     /**
      * das war schwieriger als es hätte sein sollen
-     * @param arr
-     * @return
+     * @param arr wird verschoben
+     * @return verschobener Array
      */
     public static int[] shiftLeft(int[] arr) {
         int temp = arr[arr.length - 1];
@@ -172,8 +172,8 @@ public class ArbeitMitArrays {
 
     /**
      * das hab ich unnötigerweise gemacht glaub ich
-     * @param arr
-     * @return
+     * @param arr wird verschoben
+     * @return verschobener Array
      */
     public static int[] shiftRight(int[] arr) {
         int temp = arr[0];
@@ -188,8 +188,8 @@ public class ArbeitMitArrays {
 
     /**
      * immerhin eine Sache die heute schön schnell geht
-     * @param arr
-     * @return
+     * @param arr wird verschoben
+     * @return verschobener Array
      */
     public static int[] shiftLeftAbsolute(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
@@ -202,8 +202,8 @@ public class ArbeitMitArrays {
 
     /**
      * auch ganz nett...
-     * @param arr
-     * @return
+     * @param arr wird verschoben
+     * @return verschobener Array
      */
     public static int[] shiftRightAbsolute(int[] arr) {
         for (int i = arr.length - 1; i > 0; i--) {
@@ -223,9 +223,14 @@ public class ArbeitMitArrays {
         int[] arr2 = {3,8,11,21,46};
         boolean[] arr3 = {true, true, false, true, false, false, true};
         double[] arr4 = {1.4, 2.9, 7.8, 2.8, 1.3, 4.1};
-        char[] arr5 = {'H','i','e','r',' ','s','t','e','h','t',' ','n','i','c','h','t','s',' ','w','i','c','h','t','i','g','e','s',',',' ','a','l','s','o',' ','e','n','t','s','p','a','n','n','e','n',' ','S','i','e',' ','s','i','c','h',' ','o','k','a','y',' ','o','d','e','r',' ','h','a','t',' ','d','a',' ','e','i','n','e','r',' ','r','e','i','n','g','e','s','c','h','i','f','f','t','?'};
-        String[] arr6 = {"lul", "amogus", "ඞsusඞ", "wer das liest kann lesen"}; //todo: den ganzen mist printen und kontrollieren das die aufgabenstellung vollständig erfüllt wurde
+        char[] arr5 = {'H','i','e','r',' ','s','t','e','h','t',' ','n','i','c','h','t','s',' ','w','i','c','h','t','i','g','e','s',',',' ','a','l','s','o',' ','e','n','t','s','p','a','n','n','e','n',' ','S','i','e',' ','s','i','c','h',',',' ','o','k','a','y',' ','o','d','e','r',' ','h','a','t',' ','d','a',' ','e','i','n','e','r',' ','r','e','i','n','g','e','s','c','h','i','f','f','t','?'};
+        String[] arr6 = {"lul", "amogus", "ඞsusඞ", "wer das liest kann lesen"};
         printArray(arr1);
+        printArray(arr2);
+        printArray(arr3);
+        printArray(arr4);
+        printArray(arr5);
+        printArray(arr6);
         printArray(shiftLeft(arr1));
         //printArray(shiftLeftAbsolute(arr1));
         printArray(arr2);
@@ -238,8 +243,3 @@ public class ArbeitMitArrays {
         printArray(err);
     }
 }
-
-
-
-
-//ich wie ich aus dem urlaub zurückkomme und hoffe ich habe nichts von dieser Aufgabe

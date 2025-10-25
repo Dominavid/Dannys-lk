@@ -17,7 +17,7 @@ public class Rechner {
      * Addieren... das konnte ich vielleicht in der *zählt angespannt mit den Fingern* ach egal
      * @param a Zahl 1
      * @param b Zahl 2
-     * @return
+     * @return Ergebnis
      */
     public static double add(double a, double b) {
         return a + b;
@@ -27,7 +27,7 @@ public class Rechner {
      * Bei subtraktion wirds langsam eng...
      * @param a Zahl 1
      * @param b Zahl 2
-     * @return
+     * @return Ergebnis
      */
     public static double sub(double a, double b) {
         return a - b;
@@ -37,7 +37,7 @@ public class Rechner {
      * wenn multipliziert wird ist mein limit langsam erreicht... kann ich einen Zettel haben?
      * @param a Zahl 1
      * @param b Zahl 2
-     * @return
+     * @return Ergebnis
      */
     public static double mul(double a, double b) {
         return a * b;
@@ -47,7 +47,7 @@ public class Rechner {
      * Nope, da bin ich raus. Division ist einer zu viel
      * @param a Zahl 1
      * @param b Zahl 2
-     * @return
+     * @return Ergebnis
      */
     public static double div(double a, double b) {
         return a / b;
