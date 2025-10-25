@@ -4,8 +4,8 @@ public class Palindrom {
 
     /**
      * funktioniert dank Timosaurius' hilfe :-D
-     * @param a
-     * @return
+     * @param a String der umgedreht wird
+     * @return umgedrehter String
      */
     public static String umkehren (String a) {
         char[] arr = a.toCharArray();
@@ -19,11 +19,22 @@ public class Palindrom {
     }
 
 
-
+    /**
+     * prüft, ob ein String ein Palind-irgendwas ist
+     * @param a der String der geprüft wird
+     * @return Wahrheitswert, der sagt, ob es sich um dein Palindrom handelt
+     */
+    public static boolean istpalindrom (String a) {
+        if (a.equals(umkehren(a))) {
+            return true;
+        } else  {
+            return false;
+        }
+    }
 
     public static void main(String[] args) {
         String a = "TimoisteinsüßißüsnietsiomiT";
-        if (a.equals(umkehren(a))) {
+        if (istpalindrom(a)) {
             System.out.println(a + " ergibt umgekehrt das gleiche, Sir.");
         } else {
             System.out.println(a + " ergibt umgekehrt nicht das gleiche, sondern " + umkehren(a) + ", Sir.");
