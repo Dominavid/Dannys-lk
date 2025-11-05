@@ -38,6 +38,12 @@ public class Topfschlagen {
         int distanzneu = 0;
         char bewegung;
 
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         System.out.print("\n\n\nPro Fehler 1 Shot (:\n\n\n");
         try {
             Thread.sleep(750);

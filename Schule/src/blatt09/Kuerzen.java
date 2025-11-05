@@ -22,13 +22,22 @@ public class Kuerzen {
     }
 
 
+    /**
+     * kürzt einen bruch
+     * @param a zähler/nenner
+     * @param b nenner/zähler
+     * @return gibt den bruch als zweiteiligen integer array raus (Format: a/b)
+     */
     public static int[] kuerzen(int a, int b) {
         int[] ateiler = Teiler.teiler(a);
         int[] bteiler = Teiler.teiler(b);
-        for (int i = ateiler.length; i >= 0; i--) {
-            for (int j = bteiler.length; j >= 0; j--) {
+        for (int i = ateiler.length - 1; i >= 0; i--) {
+            for (int j = bteiler.length - 1; j >= 0; j--) {
                 if (ateiler[i] == bteiler[j]) {
-                } //todo: beenden (äußerst unfertig)
+                    a /= ateiler[i];
+                    b /= ateiler[i];
+                    return new int[]{a, b};
+                }
             }
         }
         return new int[]{a, b};
@@ -36,12 +45,14 @@ public class Kuerzen {
 
     public static void main(String[] args) {
         int zaehler = 4;
-        int nenner = 9;
+        int nenner = 12;
         if (istKuerzbar(nenner, zaehler)) {
             System.out.println("Euer Exzellenz, unsere Berechnungen ergeben, dass sich der Bruch \"" + zaehler + "/" + nenner + "\" kürzen ließe, wenn man das denn möchte.");
-
+            int[] bruch = kuerzen(zaehler, nenner);
+            System.out.println("Euer Exzellenz, hier der gekürzte Bruch:\n" + bruch[0] + "/" + bruch[1]);
         } else {
             System.out.println("Euer Exzellenz, leider scheint sich der Bruch \"" + zaehler + "/" + nenner + "\" nicht kürzen zu lassen.");
         }
+
     }
 }

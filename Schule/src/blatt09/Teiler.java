@@ -64,7 +64,7 @@ public class Teiler {
     public static void main(String[] args) {
         int geteilt = 15;
         int teiler = 6;
-        int zahl = 45;
+        int zahl = 47;
         if (istTeiler(geteilt, teiler)) {
             System.out.println(geteilt + " kann durch " + teiler + " geteilt werden, Sir.");
         } else {
