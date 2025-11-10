@@ -66,35 +66,39 @@ public class Primzahlen {
 
 
 
-    public static void primfaktorzerlegung(int a) {/*
-        int z = 0;
-        while (true) {
-            int[] t = Teiler.teiler(a);
-            for (int i = t.length - 1; i >= 0; i--) {
-                if (istPrim(t[i])) {
-                    a /= t[i];
-                    z++;
+    public static void primfaktorzerlegung(int a) {
+        if (istPrim(a)) {
+            System.out.println("Be"); //todo: fertig machen
+        }
+        System.out.print("\n" + a + " = ");
+        boolean e = true;
+        boolean s = false;
+        for (int i = 0; i <= a; i++) {
+            if (istPrim(i)) {
+                if (((double) a / i) == (a / i)) {
+                    a /= i;
+                    if (e) {
+                        e = false;
+                        System.out.print(i);
+                    } else {
+                        System.out.print(" * " + i);
+                    }
                     if (a == 1) {
+                        s = true;
+                        System.out.println();
                         break;
                     }
                 }
             }
         }
-
-        while (true) {
-            int[] t = Teiler.teiler(a);
-            for (int i = t.length - 1; i >= 0; i--) {
-                if (istPrim(t[i])) {
-
-                    }
-                }
-            }
+        if (!s) {
+            System.out.println("\nEuer Gnaden mögen verzeihen, es scheint ein Fehler aufgetreten zu sein.");
         }
-    }*/
+    }
 
 
     public static void main(String[] args) {
-        int zahl = 8;
+        int zahl = 86;
         if  (istPrim(zahl)) {
             System.out.println("Die Zahl \"" + zahl + "\" ist eine Primzahl, Sir.");
         } else {
@@ -104,5 +108,7 @@ public class Primzahlen {
         int[] primzahlen = generierePrimzahlen(zahl);
         printPrim(zahl);
         //System.out.println(primzahlen.length);
+        System.out.println("\n\n\nHier die Primfaktorzerlegung von \"" + zahl + "\" die Euer Gnaden anforderte:");
+        primfaktorzerlegung(zahl);
     }
 }
