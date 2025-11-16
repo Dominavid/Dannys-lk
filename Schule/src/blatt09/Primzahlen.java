@@ -67,38 +67,55 @@ public class Primzahlen {
 
 
     public static void primfaktorzerlegung(int a) {
-        if (istPrim(a)) {
-            System.out.println("Be"); //todo: fertig machen
-        }
+        int[] pz = generierePrimzahlen(a);
         System.out.print("\n" + a + " = ");
         boolean e = true;
         boolean s = false;
-        for (int i = 0; i <= a; i++) {
-            if (istPrim(i)) {
-                if (((double) a / i) == (a / i)) {
-                    a /= i;
-                    if (e) {
-                        e = false;
-                        System.out.print(i);
-                    } else {
-                        System.out.print(" * " + i);
-                    }
-                    if (a == 1) {
-                        s = true;
-                        System.out.println();
-                        break;
-                    }
+        for (int i = 0; i < pz.length; i++) {
+            //System.out.println("\n" + ((double) a / pz[i]));
+            if (((double)a / pz[i]) == (a / pz[i])) {
+                a /= pz[i];
+                if (e) {
+                    e = false;
+                    System.out.print(pz[i]);
+                    //System.out.print("\t" + a);
+                } else {
+                    System.out.print(" * " + pz[i]);
+                    //System.out.print("\t" + a);
+                }
+                i = -1;
+                if (istPrim(a)) {
+                    System.out.print(" * " + a);
+                    s = true;
+                    //System.out.println("t");
+                    break;
                 }
             }
+
         }
         if (!s) {
             System.out.println("\nEuer Gnaden mögen verzeihen, es scheint ein Fehler aufgetreten zu sein.");
         }
+        /*
+        Aufgabe 4:
+            Auführbarkeit:
+
+            Allgemeinheit:
+
+            Eindeutigkeit:
+
+            Endlichkeit:
+
+            Determiniertheit:
+
+            Terminierung:
+
+         */
     }
 
 
     public static void main(String[] args) {
-        int zahl = 86;
+        int zahl = 183;
         if  (istPrim(zahl)) {
             System.out.println("Die Zahl \"" + zahl + "\" ist eine Primzahl, Sir.");
         } else {

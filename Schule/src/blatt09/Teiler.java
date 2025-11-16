@@ -13,6 +13,21 @@ public class Teiler {
             return true;
         }
         return false;
+        /*
+        Aufgabe 4:
+            Auführbarkeit:
+
+            Allgemeinheit:
+
+            Eindeutigkeit:
+
+            Endlichkeit:
+
+            Determiniertheit:
+
+            Terminierung:
+
+         */
     }
 
     /**
