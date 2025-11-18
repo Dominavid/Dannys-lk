@@ -13,10 +13,7 @@ public class Teiler {
             System.out.println("Euer Gnaden mögen bedenken, dass Teilungen durch 0 mathematisch nicht möglich sind.");
             return false;
         }
-        if (((double) a / b) == (a / b)) {
-            return true;
-        }
-        return false;
+        return ((double) a / b) == (a / b);
         /*
         Aufgabe 4:
             Auführbarkeit:
@@ -81,8 +78,8 @@ public class Teiler {
 
 
     public static void main(String[] args) {
-        int geteilt = 18;
-        int teiler = 0;
+        int geteilt = 17;
+        int teiler = 3;
         int zahl = 47;
         if (istTeiler(geteilt, teiler)) {
             System.out.println(geteilt + " kann durch " + teiler + " geteilt werden, Sir.");
