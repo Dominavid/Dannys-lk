@@ -9,8 +9,10 @@ public class Teiler {
      * @return Rückgabe als boolean
      */
     public static boolean istTeiler(int a, int b) {
-        System.out.println("Euer Gnaden mögen bedenken, dass Teilungen durch 0 mathematisch nicht möglich sind.");
-        return false;
+        if (b == 0) {
+            System.out.println("Euer Gnaden mögen bedenken, dass Teilungen durch 0 mathematisch nicht möglich sind.");
+            return false;
+        }
         if (((double) a / b) == (a / b)) {
             return true;
         }
