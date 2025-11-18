@@ -99,23 +99,23 @@ public class Primzahlen {
         /*
         Aufgabe 4:
             Auführbarkeit:
-
+                erfüllt, da falls eine Zerlegung nicht klappt eine geplante Fehlermeldung aufpoppt.
             Allgemeinheit:
-
+                erfüllt, da es mit jeder Zahl entweder funktioniert oder ein Fehler abgefangen wird.
             Eindeutigkeit:
-
+                laut Herr Schisch seinem Arbeitsbla- ähh ich meine natürlich laut des Arbeitsblattes des Herrn Schischs sowieso gegeben
             Endlichkeit:
-
+                um hier durchzufallen bin ich nicht fleißig genug
             Determiniertheit:
-
+                gegeben, da sich der Code einmal hochgeladen nicht verändert
             Terminierung:
-
+                gegeben, da keine endlos laufenden schleifen da sind
          */
     }
 
 
     public static void main(String[] args) {
-        int zahl = 183;
+        int zahl = -183;
         if  (istPrim(zahl)) {
             System.out.println("Die Zahl \"" + zahl + "\" ist eine Primzahl, Sir.");
         } else {

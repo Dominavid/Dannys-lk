@@ -48,15 +48,14 @@ public class Kuerzen {
             Allgemeinheit:
                 erfüllt, da es mit jedem Zähler und jedem Nenner funktioniert
             Eindeutigkeit:
-                laut Herr Schisch seinem Arbeitsbla- ähh ich meine natürlich laut dem Arbeitsblatt des Herrn Schischs sowieso gegeben
+                laut Herr Schisch seinem Arbeitsbla- ähh ich meine natürlich laut des Arbeitsblattes des Herrn Schischs sowieso gegeben
             Endlichkeit:
                 um hier durchzufallen bin ich nicht fleißig genug
             Determiniertheit:
                 gegeben, da sich der Code einmal hochgeladen nicht verändert
             Terminierung:
-
+                gegeben, da keine endlos laufenden schleifen da sind
          */
-        //todo: hier und auf den anderen Blättern den scheiß  fertifg machen
     }
 
     public static void main(String[] args) {

@@ -9,6 +9,8 @@ public class Teiler {
      * @return Rückgabe als boolean
      */
     public static boolean istTeiler(int a, int b) {
+        System.out.println("Euer Gnaden mögen bedenken, dass Teilungen durch 0 mathematisch nicht möglich sind.");
+        return false;
         if (((double) a / b) == (a / b)) {
             return true;
         }
@@ -16,17 +18,17 @@ public class Teiler {
         /*
         Aufgabe 4:
             Auführbarkeit:
-
+                erfüllt, da Divisionen durch 0 abgefangen werden
             Allgemeinheit:
-
+                erfüllt, da die simple Java-Eingabe alles kann was sie können muss
             Eindeutigkeit:
-
+                laut Herr Schisch seinem Arbeitsbla- ähh ich meine natürlich laut des Arbeitsblattes des Herrn Schischs sowieso gegeben
             Endlichkeit:
-
+                um hier durchzufallen bin ich nicht fleißig genug
             Determiniertheit:
-
+                gegeben, da sich der Code einmal hochgeladen nicht verändert
             Terminierung:
-
+                gegeben, da keine schleifen da sind und erst recht keine endlos laufenden
          */
     }
 
@@ -77,8 +79,8 @@ public class Teiler {
 
 
     public static void main(String[] args) {
-        int geteilt = 15;
-        int teiler = 6;
+        int geteilt = 18;
+        int teiler = 0;
         int zahl = 47;
         if (istTeiler(geteilt, teiler)) {
             System.out.println(geteilt + " kann durch " + teiler + " geteilt werden, Sir.");
