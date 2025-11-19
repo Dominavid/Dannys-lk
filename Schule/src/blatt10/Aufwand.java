@@ -2,7 +2,7 @@ package blatt10;
 
 public class Aufwand {
 
-
+    //String speicheranalyse = "5 int + 3 char arrays"
     /**
      * berechnet wie oft ein satz in einem char-array beendet wird (alles was auf '. ' endet)
      * @param charr der satz als char array
@@ -18,6 +18,7 @@ public class Aufwand {
             }
         }
         return count;
+        //wirkt recht effizient
     }
 
 
@@ -65,3 +66,5 @@ public class Aufwand {
 
 
 }
+
+//Best case ist ein kurzer text ohne ". " worst ist einer mit ganz viel davon
