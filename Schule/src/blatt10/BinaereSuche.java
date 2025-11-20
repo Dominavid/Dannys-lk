@@ -6,6 +6,7 @@ public class BinaereSuche {
 		int obergrenze = arr.length;
 		int untergrenze = 0;
 		int i;
+		//int counter = 0;
 		while (true) {
 			i = (obergrenze + untergrenze) / 2;
 			if (arr[i] == n) {
@@ -15,6 +16,7 @@ public class BinaereSuche {
 			} else if (arr[i] > n) {
 				untergrenze = i;
 			}
+			//counter += 4;
 			if (obergrenze == untergrenze) { //todo: wenn da obergrenze und untergrenze nebeneinander sind kanns probleme geben
 				return false;
 			}
