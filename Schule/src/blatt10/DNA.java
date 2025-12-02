@@ -95,22 +95,96 @@ public class DNA {
 
 
 
-    public static byte[] zuDNA_effizient(String a) { //DANKEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEee :DDDDDDDDD
+    public static byte[] zuDNA_effizient(String a) { //blyad bin doch zufrieden mit ein gen pro byte
         if (a.length() % 4 != 0) {
             System.out.println("Euer Gnaden, bitte gebt die Genome so an, dass wir jeweils vier Stück bündeln können.");
             return null;
         }
         char[] b = a.toCharArray();
-        byte[] z = new byte[b.length/2];
-        int k;
-        int l;
-        int m;
-        int n;
+        byte[] z = new byte[b.length/4];
+        int g1 = 0;
+        int g2 = 0;
+        int g3 = 0;
+        int g4 = 0;
         for (int i = 0; i < b.length; i++) { //byte = v0*64 + v1*16 + v2*4 + v3;
 
-            z[i/4] =
+
+            if (b[i] == 'A') {
+                g1 = 0;
+            } else if (b[i] == 'T') {
+                g1 = 1;
+            } else if (b[i] == 'G') {
+                g1 = 2;
+            } else if (b[i] == 'C') {
+                g1 = 3;
+            }
+
+            if (b[i+1] == 'A') {
+                g2 = 0;
+            } else if (b[i+1] == 'T') {
+                g2 = 1;
+            } else if (b[i+1] == 'G') {
+                g2 = 2;
+            } else if (b[i+1] == 'C') {
+                g2 = 3;
+            }
+
+            if (b[i+2] == 'A') {
+                g3 = 0;
+            } else if (b[i+2] == 'T') {
+                g3 = 1;
+            } else if (b[i+2] == 'G') {
+                g3 = 2;
+            } else if (b[i+2] == 'C') {
+                g3 = 3;
+            }
+
+            if (b[i+3] == 'A') {
+                g4 = 0;
+            } else if (b[i+3] == 'T') {
+                g4 = 1;
+            } else if (b[i+3] == 'G') {
+                g4 = 2;
+            } else if (b[i+3] == 'C') {
+                g4 = 3;
+            }
+
+            //den scheiß vergeben
+
+            int i1 = (g1 * 64 + g2 * 16 + g3 * 4 + g4) - 128;
+            z[i/4] = (byte) i1;
         }
-        return z;
+        return z; //suka blyad der scheiß ist wahrscheinlich gottlos falsch aber egal ich geh jetz erstmal heulen weil ich gesehen hab das ich das jetzt auch noch andersrum machen muss
+    }
+
+
+
+    public static String zuDNA_effizient(byte[] a) {
+        char[] z = new char[a.length*4];
+        for (int i = 0; i < z.length - 3; i += 4) {
+            byte j = a[i/4];
+            int k = 0;
+            int x = -64;
+            int y = 0;
+            for (int c = 0; c < 4; c++) {
+                while (j >= x) {
+                    k = 0;
+                    k++;
+                    j -= x;
+                }
+                if (k == 0) {
+                    z[i+c] = 'A';
+                } else if (k == 1) {
+                    z[i+c] = 'T';
+                } else if (k == 2) {
+                    z[i+c] = 'G';
+                } else if (k == 3) {
+                    z[i+c] = 'C';
+                }
+                x /=4;
+            }
+        }
+        return z.toString(); //wahrscheinlich noch gottlos falscher aber jetz bin ich zumindest durch
     }
 
 
