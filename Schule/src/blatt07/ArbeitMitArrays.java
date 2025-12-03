@@ -103,11 +103,11 @@ public class ArbeitMitArrays {
             } else {
             for (int i = 0; i < arr.length - 1; i++) {
                 if (aufsteigend) {
-                    if (arr[i] >= arr[i + 1]) {
+                    if (arr[i] >/*=*/ arr[i + 1]) {
                         return false;
-                    }
+                    } //auf das mich diese gleichzeichen auf immer an meine torheit erinnern
                 } else  {
-                    if (arr[i] <= arr[i + 1]) {
+                    if (arr[i] </*=*/ arr[i + 1]) {
                         return false;
                     }
                 }
@@ -117,6 +117,15 @@ public class ArbeitMitArrays {
         System.out.println("Error");
         System.exit(0);
         return false;
+    }
+
+    public static int[] stalinSort(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i - 1] > arr[i]) {
+                //todo arr[i - 1] = null;
+            }
+        }
+        return arr;
     }
 
     /**

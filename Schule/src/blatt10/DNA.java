@@ -4,6 +4,11 @@ package blatt10;
 
 public class DNA {
 
+    /**
+     * prüft ob sich ein als String gespeicherter DNA Code um einen korrekten DNA Code handelt
+     * @param a der zu prüfende String
+     * @return ob es korrekt ist (boolean)
+     */
     public static boolean istDNA(String a) {
         if (a.length() % 2 != 0) {
             return false;
@@ -18,6 +23,11 @@ public class DNA {
     }
 
 
+    /**
+     * wandelt als string gespeicherte DNA in als byte-array gespeicherte DNA um (ein byte pro genom)
+     * @param a der String mit der DNA
+     * @return der Byte-Array mit der DNA
+     */
     public static byte[] zuDNA(String a) {
         byte[] z = new byte[a.length()]; //man könnte sich die hälfte des arrays sparen wenn man in jeden byte ein paar statt eines einzelnen genoms steckt
         char[] b = a.toCharArray();
@@ -36,7 +46,11 @@ public class DNA {
     }
 
 
-
+    /**
+     * wandelt als byte-array (ein byte pro genom) gespeicherte DNA in als string gespeicherte DNA um
+     * @param a der Byte-Array mit der DNA
+     * @return der String mit der DNA
+     */
     public static String zuDNA(byte[] a) {
         char[] z = new char[a.length];
         for (int i = 0; i < a.length; i++) {
@@ -54,7 +68,11 @@ public class DNA {
     }
 
 
-
+    /**
+     * wandelt als string gespeicherte DNA in als boolean-array gespeicherte DNA um (zwei boolean pro genom)
+     * @param a der String mit der DNA
+     * @return der boolean-Array mit der DNA
+     */
     public static boolean[] zuDNA_Bool(String a) {
         char[] b = a.toCharArray();
         boolean[] z = new boolean[b.length*2];
@@ -77,6 +95,12 @@ public class DNA {
     }
 
 
+
+    /**
+     * wandelt als boolean-array gespeicherte DNA (zwei boolean pro genom) in als string gespeicherte DNA um
+     * @param a der boolean-Array mit der DNA
+     * @return der String mit der DNA
+     */
     public static String zuDNA_Bool(boolean[] a) {
         char[] z = new char[a.length/2];
         for (int i = 0; i < a.length - 1; i += 2) {
@@ -95,6 +119,12 @@ public class DNA {
 
 
 
+
+    /**
+     * wandelt als string gespeicherte DNA in als byte-array gespeicherte DNA um (ein byte pro vier genome)
+     * @param a der Byte-Array mit der DNA
+     * @return der String mit der DNA
+     */
     public static byte[] zuDNA_effizient(String a) { //blyad bin doch zufrieden mit ein gen pro byte
         if (a.length() % 4 != 0) {
             System.out.println("Euer Gnaden, bitte gebt die Genome so an, dass wir jeweils vier Stück bündeln können.");
@@ -159,6 +189,13 @@ public class DNA {
 
 
 
+
+
+    /**
+     * wandelt als byte-array gespeicherte DNA (ein byte pro vier genome) in als string gespeicherte DNA um
+     * @param a der String mit der DNA
+     * @return der Byte-Array mit der DNA
+     */
     public static String zuDNA_effizient(byte[] a) {
         char[] z = new char[a.length*4];
         for (int i = 0; i < z.length - 3; i += 4) {

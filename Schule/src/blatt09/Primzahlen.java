@@ -65,7 +65,10 @@ public class Primzahlen {
     }
 
 
-
+    /**
+     * zerlegt eine Zahl (hoffentlich korrekt) per Primzahlzerlegung
+     * @param a zahl für die Primfaktorzerlegung gesucht wird
+     */
     public static void primfaktorzerlegung(int a) {
         int[] pz = generierePrimzahlen(a);
         System.out.print("\n" + a + " = ");
