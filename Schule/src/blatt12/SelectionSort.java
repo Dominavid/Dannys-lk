@@ -1,54 +1,29 @@
-package blatt11;
+package blatt12;
 
-//import java.util.Arrays;
-
-public class BubbleSort {
+public class SelectionSort {
 
     /**
-     * tauscht zwei elemente im array
-     *
-     * @param arr der array aus dem geswappt wird
-     * @param i   position von erstem tausch array
-     * @param j   position von zweiten tausch array
+     * ein sortierprogramm welches quasi vollständig von intellij vorgegeben wurde (:
+     * @param arr
+     * @return
      */
-    public static int[] swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-        return arr;
-    }
-
-
-    /**
-     * bubble sortet einen int-array
-     * @param a array der gesortet werden muss
-     * @return gesorteter array
-     */
-    public static int[] bubbleSort(int[] a) {
-        boolean swap = false;
-        int k = a.length;
-        for (int j = 0; j < a.length; j++) {
-            for (int i = 1; i < k; i++) {
-                if (a[i - 1] > a[i]) {
-                    swap(a, i - 1, i);
-                    swap = true;
+    public static int[] selectionSort(int[] arr){
+        for (int i = 0; i < arr.length; i++) {
+            int min = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[min]) {
+                    min = j;
                 }
             }
-            if (!swap) { //(wenn einen durchlauf lang nicht geswappt wurde, weiß man, dass es fertig ist)
-                return a;
-            }
-            swap = false;
-            k--;
+            blatt11.BubbleSort.swap(arr, i, min);
         }
-        //Arrays.sort(a);
-        return a; //e), an sich würde das gehen, und ich baue es jetzt ein. Da der bubble sort ja auch prüft ob etwas sortiert ist, um eben zu wissen ob man es swappen muss kann man einfach einen boolean einbauen der das checkt ob geswappt werden musste.
-    } //O(n²)
+        return arr;
+    } //#intellijdiegeilesauhatdenganzenscheißfürmichgemacht(:
+
 
 
     public static void main(String[] args) {
         int[] sukablyad = new int[] {137, 42, 299, 8, 413, 221, 56, 90, 12, 305, 77, 468, 19, 254, 361, 4, 198, 73, 407, 285, 31, 499, 222, 65, 11, 320, 276, 84, 150, 398, 239, 27, 102, 345, 6, 210, 431, 58, 134, 370, 93, 288, 17, 440, 205, 67, 300, 121, 9, 246, 482, 33, 415, 280, 106, 368, 2, 459, 141, 352, 25, 492, 178, 39, 260, 7, 344, 115, 423, 216, 48, 386, 132, 269, 96, 329, 13, 451, 208, 71, 314, 182, 36, 478, 125, 401, 230, 63, 297, 21, 374, 110, 437, 193, 54, 336, 15, 466, 223, 88, 311, 186, 29, 495, 118, 389, 241, 69, 278, 5, 342, 101, 428, 167, 46, 356, 20, 484, 144, 75, 324, 190, 37, 453, 128, 408, 234, 61, 284, 10, 371, 112, 447, 176, 41, 338, 23, 474, 151, 82, 318, 202, 35, 490, 123, 394, 248, 68, 272, 14, 348, 108, 432, 169, 44, 362, 18, 486, 146, 79, 328, 195, 32, 457, 130, 404, 237, 60, 291, 22, 378, 116, 443, 180, 40, 334, 26, 470, 155, 86, 322, 199, 34, 497, 120, 396, 252, 72, 275, 16, 350, 104, 436, 172, 49, 358, 24, 480, 148, 81, 316, 187, 30, 449, 126, 400, 240, 64, 283, 3, 376, 113, 445, 184, 43, 340, 28, 476, 153, 85, 326, 196, 38, 494, 122, 392, 245, 70, 270, 1, 346, 100, 430, 170, 47, 354, 50, 488, 142, 78, 312, 191, 45, 455, 127, 406, 233, 62, 289, 52, 380, 114, 441, 181, 51, 332, 55, 472, 156, 87, 319, 57, 498, 124, 395, 250, 74, 277, 59, 349, 107, 435, 174, 66, 360, 76, 483, 145, 91, 325, 194, 80, 452, 129, 402, 236, 95, 293, 89, 382, 117, 444, 185, 94, 339, 97, 471, 158, 92, 321, 203, 99, 491, 119, 397, 249, 98, 274, 103, 351, 109, 434, 175, 105, 359, 111, 485, 147, 83, 327, 197, 138, 456, 131, 405, 238, 139, 295, 135, 379, 140, 442, 183, 143, 333, 149, 473, 152, 317, 201, 154, 493, 157, 393, 247, 159, 271, 160, 347, 161, 429, 171, 162, 353, 163, 487, 164, 313, 192, 165, 454, 166, 403, 235, 168, 292, 173, 381, 177, 439, 179, 335, 180, 475, 188, 323, 189, 496, 194, 399, 195, 279, 196, 355, 197, 433, 199, 361, 200, 481, 204, 315, 205, 450, 206, 395, 207, 286, 209, 377, 211, 438, 212, 341, 213, 467, 214, 303, 215, 489, 217, 387, 218, 267, 219, 357, 220, 425, 224, 365, 225, 479, 226, 309, 227, 446, 228, 385, 229, 265, 231, 343, 232, 427, 242, 367, 243, 464, 244, 307, 251, 391, 253, 263, 255, 363, 256, 426, 257, 369, 258, 465, 259, 301, 261, 388, 262, 264, 266, 366, 268, 424, 270, 364, 273, 461, 281, 306, 282, 384, 287, 290, 372, 294, 422, 296, 360, 298, 460, 302, 308, 304, 383, 310, 319, 375, 321, 420, 322, 362, 323, 458, 325, 330, 390, 331, 373, 333, 418, 334, 359, 335, 463, 336, 386, 338, 370, 340, 416, 341, 358, 342, 462, 343, 382, 345, 368, 347, 414, 348, 356, 349, 460, 350, 381, 352, 371, 354, 412, 355, 354, 356, 459, 357, 380, 359, 369, 361, 410, 362, 352, 363, 457, 364, 379, 366, 367, 368, 408, 369, 350, 370, 455, 371, 378, 373, 365, 375, 406, 376, 348, 377, 453, 378, 377, 380, 363, 382, 404, 383, 346, 384, 451, 385, 376, 387, 361, 389, 402, 390, 344, 391, 449, 392, 375, 394, 359, 396, 400, 397, 342, 398, 447, 399, 374, 401, 357, 403, 398, 404, 340, 405, 445, 406, 373, 408, 355, 410, 396, 411, 338, 412, 443, 413, 372, 415, 500}; //BLYAD BING COPILOT TAUGT ZU NICHTS DA STEHT JEDE ZWEITE ZAHL GEFÜHLT ZWEIMAL DRIN!!!
-        int[] blyadsuka = bubbleSort(sukablyad);
-        System.out.println("Ist sortiert?\t\t" + blatt07.ArbeitMitArrays.istSortiert(blyadsuka) + "\n\n"); //blyad die istSortiert funktion funktioniert nicht richtig, anfällig gegen dopplungen...
-        blatt07.ArbeitMitArrays.printArray(blyadsuka); //so, gefixt
+        blatt07.ArbeitMitArrays.printArray(selectionSort(sukablyad));
     }
 }
