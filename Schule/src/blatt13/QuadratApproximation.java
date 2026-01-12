@@ -13,6 +13,7 @@ public class QuadratApproximation {
         if (a <= 0) {
             System.out.println("Quadrat existiert nichts Schere");
         }
+        for (int i = 0; )
     }
 
 
