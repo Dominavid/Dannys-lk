@@ -62,7 +62,7 @@ public class PenAndPaper {
         }
         int z = wuerfel(a, b);
         z += c;
-        z -= d;
+        //z -= d;
         if (z <= 0) {
             return 0;
         }
@@ -71,19 +71,26 @@ public class PenAndPaper {
 
 
     public static void main(String[] args) {
-        int hpbarbar = 70;
-        int nachteilbarbar = 3;
+        int hpbarbarx = 70;
+        int nachteilbarbarx = 3;
+
+        int hpbardex = 42;
+        int vorteilbardex = 3;
+
+
+        int hpbarbar = hpbarbarx;
+        int nachteilbarbar = nachteilbarbarx;
         int siegebarbar = 0;
         boolean nachteil = true;
 
 
-        int hpbarde = 42;
-        int vorteilbarde = 3;
+        int hpbarde = hpbardex;
+        int vorteilbarde = vorteilbardex;
         int siegebarde = 0;
         boolean vorteil = true;
 
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100000; i++) {
             while (hpbarbar > 0 && hpbarde > 0) {
                 if (vorteilbarde == 0) {
                     vorteil = false;
@@ -99,7 +106,7 @@ public class PenAndPaper {
                 int schadenbarde = angriff(1, 6, 2, 14, vorteil, false);
                 if  (schadenbarde < 0) {
                     schadenbarde = 0;
-                } //todo: die scheiße teilt stets 0 schaden aus
+                }
                 int schadenbarbar = angriff(1, 8, 1, 10, false, nachteil);
                 if (schadenbarbar < 0) {
                     schadenbarbar = 0;
@@ -108,22 +115,31 @@ public class PenAndPaper {
 
                 hpbarbar -= schadenbarde;
                 hpbarde -= schadenbarbar;
-                System.out.println(hpbarbar);
-                System.out.println(hpbarde);
+                //System.out.println(hpbarbar);
+                //System.out.println(hpbarde);
             }
             if (hpbarbar <= 0) {
                 siegebarde++;
             } else {
                 siegebarbar++;
             }
-            hpbarbar = 70;
-            hpbarde = 42;
-            nachteilbarbar = 3;
-            vorteilbarde = 3;
+            hpbarbar = hpbarbarx;
+            hpbarde = hpbardex;
+            nachteilbarbar = nachteilbarbarx;
+            vorteilbarde = vorteilbardex;
             nachteil = true;
             vorteil = true;
         }
 
         System.out.println("Der Barde siegte in " + siegebarde + " Fällen, während er in " + siegebarbar + " Fällen unterlag, Sir.");
+        /*  Siegeschancen Barde:
+        normale Einstellungen:                                  1.12%   (sehr präzise)
+        Barde hat stets Vorteil:                            ca. 13%     (Ergebnisse ungenauer ---> Höherer Glückaspekt)
+        Barbar hat stets Nachteil:                              21.4%   (deutlich präziser als Barde mit Vorteil, wenig unpräziser als normal)
+        Barde hat stets Vorteil + Barbar hat stets Nachteil:    63-64%  (wenig unpräziser als Barbar mit Nachteil)
+        Barde hat 2 Würfel:                                     24%
+        Barde hat d20 Würfel:                                   56%
+        Barde hat 2d20 Würfel:                                  91%
+        */
     }
 }
