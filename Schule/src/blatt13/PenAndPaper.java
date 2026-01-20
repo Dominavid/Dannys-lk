@@ -47,14 +47,14 @@ public class PenAndPaper {
 
 
     /**
-     *
+     * berechnet den Schaden eines Angriffs
      * @param a Anzahl der Angriffswürfel
      * @param b Summe der Angriffswürfel
      * @param c Angriffsbonus
-     * @param d Rüstungsklasse
+     * @param d Rüstungsklasse des Ziels
      * @param v Vorteil?
      * @param n Nachteil?
-     * @return
+     * @return ausgeteilter Schaden (-1 bei kein Treffer)
      */
     public static int angriff(int a, int b, int c, int d, boolean v, boolean n) {
         if (!check(d,v,n)) {

@@ -36,7 +36,7 @@ public class Zufall {
      * @return der zufällige int-Wert
      */
     public static int zufallGanz(int b) {
-        return (int) (Math.random()*(b));
+        return Math.toIntExact(Math.round(Math.random() * (b)));
     }
 
 
