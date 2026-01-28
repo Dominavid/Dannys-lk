@@ -119,10 +119,10 @@ public class ArbeitMitArrays {
         return false;
     }
 
-    public static int[] stalinSort(int[] arr) {
+    public static Integer[] stalinSort(Integer[] arr) {
         for (int i = 1; i < arr.length; i++) {
             if (arr[i - 1] > arr[i]) {
-                //todo arr[i - 1] = null;
+                arr[i - 1] = null;
             }
         }
         return arr;

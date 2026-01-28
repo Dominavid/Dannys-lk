@@ -112,6 +112,9 @@ public class MultiArrays {
 
 
 
+
+
+
     public static boolean istIdentisch(char[][] arr, char[][] brr) {
         if (arr.length != brr.length) {
             return false;
@@ -130,11 +133,47 @@ public class MultiArrays {
     }
 
 
+
+    /**
+     * sehr nötiges Programm
+     * @param arr ein 2D char array
+     * @return 1 zu 1 der gleiche 2D Char array
+     */
+    public static char[][] copy2DCharArray(char[][] arr) {
+        char[][] brr = new char[arr.length][arr[0].length];
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                brr[i][j] = arr[i][j];
+            }
+        }
+        return brr;
+    }
+
+
+    /**
+     * Verschiebt die gewählte Reihe eines 2D Int Arrays um einen gegebenen Wert nach links
+     * @param arr der Array
+     * @param n welche reihe verschoben wird (beginnend bei 0)
+     * @param m wie weit verschieben
+     * @return verschobener array
+     */
+    public static int[][] shiftRows(int[][] arr, int n, int m) {
+        for (int i = 0; i < m; i++) {
+            blatt07.ArbeitMitArrays.shiftLeft(arr[n]);
+        }
+        return arr;
+    }
+
+
     public static void main(String[] args) {
         int[][] arr = {{1,2,5,3,2,1,6},{3,4,6,34,3,7,3},{5,6,6,433,5,3},{1,3,6,43,5,5},{9,6,4,63,25,4}};
         print2DArray(createRandom2DIntArray(8,8,13,2));
         print2DArray(createRandom2DDoubleArray(8,8,1.6,2744.5));
         print2DArray(createCountingArray(5,5));
         print2DArray(createEmpty2DCharArray(15,15));
+        System.out.println(istIdentisch(createEmpty2DCharArray(15,15), copy2DCharArray(createEmpty2DCharArray(15,15))));
+        print2DArray(arr);
+        System.out.println("\n\n\n\n\n");
+        print2DArray(shiftRows(arr,2,2));
     }
 }
