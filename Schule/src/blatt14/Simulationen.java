@@ -2,6 +2,8 @@ package blatt14;
 
 import schisch_visualizer.SchischVisualizer;
 
+import java.util.Scanner;
+
 public class Simulationen {
 
     /**
@@ -74,19 +76,19 @@ public class Simulationen {
      * @param charr das Spielfeld
      * @param koord1 x-Koordinate
      * @param koord2 y-Koordinate
-     * @param rand ob bei Überschreiten des Randes von vorne angefangen werden soll
+     * @param rand ob bei Überschreiten des Randes von der anderen Seite angefangen werden soll
      * @return was nördlich der gegebenen Position liegt
      */
     public static char getNorden(char[][] charr, int koord1, int koord2, boolean rand) {
-        if (koord1 >= charr.length || koord2 >= charr[0].length) {
+        if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
             System.out.println("Koordinaten ungültig");
             return ' ';
         }
         try {
-            return charr[koord1][koord2+1];
+            return charr[koord1][koord2-1];
         } catch (ArrayIndexOutOfBoundsException e) {
             if (rand) {
-                return charr[koord1][0];
+                return charr[koord1][charr[0].length-1];
             } else {
                 return ' ';
             }
@@ -100,11 +102,11 @@ public class Simulationen {
      * @param charr das Spielfeld
      * @param koord1 x-Koordinate
      * @param koord2 y-Koordinate
-     * @param rand ob bei Überschreiten des Randes von vorne angefangen werden soll
+     * @param rand ob bei Überschreiten des Randes von der anderen Seite angefangen werden soll
      * @return was östlich der gegebenen Position liegt
      */
     public static char getOsten(char[][] charr, int koord1, int koord2, boolean rand) {
-        if (koord1 >= charr.length || koord2 >= charr[0].length) {
+        if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
             System.out.println("Koordinaten ungültig");
             return ' ';
         }
@@ -127,19 +129,19 @@ public class Simulationen {
      * @param charr das Spielfeld
      * @param koord1 x-Koordinate
      * @param koord2 y-Koordinate
-     * @param rand ob bei Überschreiten des Randes von vorne angefangen werden soll
+     * @param rand ob bei Überschreiten des Randes von der anderen Seite angefangen werden soll
      * @return was südlich der gegebenen Position liegt
      */
-    public static char getSueden(char[][] charr, int koord1, int koord2, boolean rand) {
-        if (koord1 >= charr.length || koord2 >= charr[0].length) {
+    public static char getSüden(char[][] charr, int koord1, int koord2, boolean rand) {
+        if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
             System.out.println("Koordinaten ungültig");
             return ' ';
         }
         try {
-            return charr[koord1][koord2-1];
+            return charr[koord1][koord2+1];
         } catch (ArrayIndexOutOfBoundsException e) {
             if (rand) {
-                return charr[koord1][charr[0].length-1];
+                return charr[koord1][0];
             } else {
                 return ' ';
             }
@@ -153,11 +155,11 @@ public class Simulationen {
      * @param charr das Spielfeld
      * @param koord1 x-Koordinate
      * @param koord2 y-Koordinate
-     * @param rand ob bei Überschreiten des Randes von vorne angefangen werden soll
+     * @param rand ob bei Überschreiten des Randes von der anderen Seite angefangen werden soll
      * @return was westlich der gegebenen Position liegt
      */
     public static char getWesten(char[][] charr, int koord1, int koord2, boolean rand) {
-        if (koord1 >= charr.length || koord2 >= charr[0].length) {
+        if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
             System.out.println("Koordinaten ungültig");
             return ' ';
         }
@@ -173,14 +175,165 @@ public class Simulationen {
     }
 
 
+
+
+    /**
+     * gibt die Position nordöstlich einer gegebenen Position zurück
+     * @param charr das Spielfeld
+     * @param koord1 x-Koordinate
+     * @param koord2 y-Koordinate
+     * @param rand ob bei Überschreiten des Randes von der anderen Seite angefangen werden soll
+     * @return was nordöstlich der gegebenen Position liegt
+     */
+    public static char getNordOst(char[][] charr, int koord1, int koord2, boolean rand) {
+        if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
+            System.out.println("Koordinaten ungültig");
+            return ' ';
+        }
+        try {
+            return charr[koord1+1][koord2-1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            if (rand) {
+                try {
+                    return charr[koord1+1][charr[koord1+1].length-1];
+                } catch (ArrayIndexOutOfBoundsException e2) {
+                    try {
+                        return charr[0][koord2-1];
+                    } catch (ArrayIndexOutOfBoundsException e3) {
+                        return charr[0][charr[0].length-1];
+                    }
+                }
+            } else {
+                return ' ';
+            }
+        }
+    }
+
+
+
+
+    /**
+     * gibt die Position nordwestlich einer gegebenen Position zurück
+     * @param charr das Spielfeld
+     * @param koord1 x-Koordinate
+     * @param koord2 y-Koordinate
+     * @param rand ob bei Überschreiten des Randes von der anderen Seite angefangen werden soll
+     * @return was nordwestlich der gegebenen Position liegt
+     */
+    public static char getNordWest(char[][] charr, int koord1, int koord2, boolean rand) {
+        if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
+            System.out.println("Koordinaten ungültig");
+            return ' ';
+        }
+        try {
+            return charr[koord1-1][koord2-1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            if (rand) {
+                try {
+                    return charr[koord1-1][charr[koord1+1].length-1];
+                } catch (ArrayIndexOutOfBoundsException e2) {
+                    try {
+                        return charr[charr.length-1][koord2-1];
+                    } catch (ArrayIndexOutOfBoundsException e3) {
+                        return charr[charr.length-1][charr[charr.length-1].length-1];
+                    }
+                }
+            } else {
+                return ' ';
+            }
+        }
+    }
+
+
+
+    /**
+     * gibt die Position südöstlich einer gegebenen Position zurück
+     * @param charr das Spielfeld
+     * @param koord1 x-Koordinate
+     * @param koord2 y-Koordinate
+     * @param rand ob bei Überschreiten des Randes von der anderen Seite angefangen werden soll
+     * @return was südöstlich der gegebenen Position liegt
+     */
+    public static char getSüdOst(char[][] charr, int koord1, int koord2, boolean rand) {
+        if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
+            System.out.println("Koordinaten ungültig");
+            return ' ';
+        }
+        try {
+            return charr[koord1+1][koord2+1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            if (rand) {
+                try {
+                    return charr[koord1+1][0];
+                } catch (ArrayIndexOutOfBoundsException e2) {
+                    try {
+                        return charr[0][koord2+1];
+                    } catch (ArrayIndexOutOfBoundsException e3) {
+                        return charr[0][0];
+                    }
+                }
+            } else {
+                return ' ';
+            }
+        }
+    }
+
+
+
+
+
+    /**
+     * gibt die Position südwestlich einer gegebenen Position zurück
+     * @param charr das Spielfeld
+     * @param koord1 x-Koordinate
+     * @param koord2 y-Koordinate
+     * @param rand ob bei Überschreiten des Randes von der anderen Seite angefangen werden soll
+     * @return was südwestlich der gegebenen Position liegt
+     */
+    public static char getSüdWest(char[][] charr, int koord1, int koord2, boolean rand) {
+        if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
+            System.out.println("Koordinaten ungültig");
+            return ' ';
+        }
+        try {
+            return charr[koord1-1][koord2+1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            if (rand) {
+                try {
+                    return charr[koord1-1][0];
+                } catch (ArrayIndexOutOfBoundsException e2) {
+                    try {
+                        return charr[charr.length-1][koord2+1];
+                    } catch (ArrayIndexOutOfBoundsException e3) {
+                        return charr[charr.length-1][0];
+                    }
+                }
+            } else {
+                return ' ';
+            }
+        }
+    }
+
+
+
+
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
         SchischVisualizer danny = new SchischVisualizer();
         char[][] spielfeld = MultiArrays.createEmpty2DCharArray(20,10);
         danny.step(spielfeld);
-        fuellen(spielfeld, 0.3);
+        fuellen(spielfeld, 0.5);
         danny.step(spielfeld);
         platzieren(spielfeld, '1');
         danny.step(spielfeld);
-        danny.start();
+        danny.start(); //todo: get funktionen testen
+        System.out.println(getNorden(spielfeld, input.nextInt(), input.nextInt(), true));
+        System.out.println(getOsten(spielfeld, input.nextInt(), input.nextInt(), true));
+        System.out.println(getSüden(spielfeld, input.nextInt(), input.nextInt(), true));
+        System.out.println(getWesten(spielfeld, input.nextInt(), input.nextInt(), true));
+        System.out.println(getNordOst(spielfeld, input.nextInt(), input.nextInt(), true));
+        System.out.println(getNordWest(spielfeld, input.nextInt(), input.nextInt(), true));
+        System.out.println(getSüdOst(spielfeld, input.nextInt(), input.nextInt(), true));
+        System.out.println(getSüdWest(spielfeld, input.nextInt(), input.nextInt(), true));
     }
 }

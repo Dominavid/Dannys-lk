@@ -12,9 +12,9 @@ public class Klammernsprache {
         int offeneklammern = 0;
         boolean reinheit = true;
         for (int i = 0; i < a.length; i++) {
-            if (a[i] == '(') {
+            if (a[i] == '[' || a[i] == '(' || a[i] == '{') {
                 offeneklammern++;
-            } else if (a[i] == ')') {
+            } else if (a[i] == ']' || a[i] == ')' || a[i] == '}') {
                 offeneklammern--;
             } else {
                 reinheit = false;
@@ -35,7 +35,7 @@ public class Klammernsprache {
 
 
     public static void main(String[] args) {
-        String a = "(()(()))";
+        String a = "[-3, [[-4,[-1,5], [2,6]]], [1,5]], [2,[[-1,2], [1,[[-1,6], [1,3]]]]]";
         if (istKlammerwort(a)) {
             System.out.println(a + " ist ein korrektes Klammerwort, Sir.");
         } else {
