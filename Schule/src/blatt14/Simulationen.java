@@ -90,7 +90,7 @@ public class Simulationen {
             if (rand) {
                 return charr[koord1][charr[0].length-1];
             } else {
-                return ' ';
+                return '§';
             }
         }
     }
@@ -116,7 +116,7 @@ public class Simulationen {
             if (rand) {
                 return charr[0][koord2];
             } else {
-                return ' ';
+                return '§';
             }
         }
     }
@@ -143,7 +143,7 @@ public class Simulationen {
             if (rand) {
                 return charr[koord1][0];
             } else {
-                return ' ';
+                return '§';
             }
         }
     }
@@ -169,7 +169,7 @@ public class Simulationen {
             if (rand) {
                 return charr[charr.length-1][koord2];
             } else {
-                return ' ';
+                return '§';
             }
         }
     }
@@ -204,7 +204,7 @@ public class Simulationen {
                     }
                 }
             } else {
-                return ' ';
+                return '§';
             }
         }
     }
@@ -239,7 +239,7 @@ public class Simulationen {
                     }
                 }
             } else {
-                return ' ';
+                return '§';
             }
         }
     }
@@ -273,7 +273,7 @@ public class Simulationen {
                     }
                 }
             } else {
-                return ' ';
+                return '§';
             }
         }
     }
@@ -285,36 +285,103 @@ public class Simulationen {
     /**
      * gibt die Position südwestlich einer gegebenen Position zurück
      * @param charr das Spielfeld
-     * @param koord1 x-Koordinate
-     * @param koord2 y-Koordinate
+     * @param x x-Koordinate
+     * @param y y-Koordinate
      * @param rand ob bei Überschreiten des Randes von der anderen Seite angefangen werden soll
      * @return was südwestlich der gegebenen Position liegt
      */
-    public static char getSüdWest(char[][] charr, int koord1, int koord2, boolean rand) {
-        if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
+    public static char getSüdWest(char[][] charr, int x, int y, boolean rand) {
+        if (x >= charr.length || y >= charr[x].length) {
             System.out.println("Koordinaten ungültig");
             return ' ';
         }
         try {
-            return charr[koord1-1][koord2+1];
+            return charr[x -1][y +1];
         } catch (ArrayIndexOutOfBoundsException e) {
             if (rand) {
                 try {
-                    return charr[koord1-1][0];
+                    return charr[x -1][0];
                 } catch (ArrayIndexOutOfBoundsException e2) {
                     try {
-                        return charr[charr.length-1][koord2+1];
+                        return charr[charr.length-1][y +1];
                     } catch (ArrayIndexOutOfBoundsException e3) {
                         return charr[charr.length-1][0];
                     }
                 }
             } else {
-                return ' ';
+                return '§';
             }
         }
     }
 
 
+
+
+
+    public static int zaehlenVier(char[][] charr, int x, int y, char ziel, boolean rand) {
+        if (ziel == '§') {
+            System.out.println("Das ist mein error symbol du dödel");
+            return -1;
+        }
+        int z = 0;
+        if (x >= charr.length || y >= charr[x].length) {
+            System.out.println("Koordinaten ungültig");
+            return -1;
+        }
+        if (getNorden(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        if (getOsten(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        if (getSüden(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        if (getWesten(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        return z;
+    }
+
+
+
+
+    public static int zaehlenAcht(char[][] charr, int x, int y, char ziel, boolean rand) {
+        if (ziel == '§') {
+            System.out.println("Das ist mein error symbol du dödel");
+            return -1;
+        }
+        int z = 0;
+        if (x >= charr.length || y >= charr[x].length) {
+            System.out.println("Koordinaten ungültig");
+            return -1;
+        }
+        if (getNorden(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        if (getOsten(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        if (getSüden(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        if (getWesten(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        if (getNordOst(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        if (getNordWest(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        if (getSüdOst(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        if (getSüdWest(charr, x, y, rand) == ziel) {
+            z++;
+        }
+        return z;
+    }
 
 
     public static void main(String[] args) {
@@ -326,14 +393,79 @@ public class Simulationen {
         danny.step(spielfeld);
         platzieren(spielfeld, '1');
         danny.step(spielfeld);
-        danny.start(); //todo: get funktionen testen
-        System.out.println(getNorden(spielfeld, input.nextInt(), input.nextInt(), true));
-        System.out.println(getOsten(spielfeld, input.nextInt(), input.nextInt(), true));
-        System.out.println(getSüden(spielfeld, input.nextInt(), input.nextInt(), true));
-        System.out.println(getWesten(spielfeld, input.nextInt(), input.nextInt(), true));
-        System.out.println(getNordOst(spielfeld, input.nextInt(), input.nextInt(), true));
-        System.out.println(getNordWest(spielfeld, input.nextInt(), input.nextInt(), true));
-        System.out.println(getSüdOst(spielfeld, input.nextInt(), input.nextInt(), true));
-        System.out.println(getSüdWest(spielfeld, input.nextInt(), input.nextInt(), true));
+        danny.start();
+        System.out.println(zaehlenVier(spielfeld, input.nextInt(), input.nextInt(), input.next().charAt(0), input.nextBoolean()));
+
+        /*
+        System.out.println("Norden");
+        while (true) {
+            System.out.println(getNorden(spielfeld, input.nextInt(), input.nextInt(), true));
+            if (input.nextBoolean()) {
+                break;
+            }
+        }
+
+
+        System.out.println("Osten");
+        while (true) {
+            System.out.println(getOsten(spielfeld, input.nextInt(), input.nextInt(), true));
+            if (input.nextBoolean()) {
+                break;
+            }
+        }
+
+        System.out.println("Süden");
+        while (true) {
+            System.out.println(getSüden(spielfeld, input.nextInt(), input.nextInt(), true));
+
+            if (input.nextBoolean()) {
+                break;
+            }
+        }
+
+        System.out.println("Westen");
+        while (true) {
+            System.out.println(getWesten(spielfeld, input.nextInt(), input.nextInt(), true));
+
+            if (input.nextBoolean()) {
+                break;
+            }
+        }
+
+        System.out.println("NordOst");
+        while (true) {
+            System.out.println(getNordOst(spielfeld, input.nextInt(), input.nextInt(), true));
+
+            if (input.nextBoolean()) {
+                break;
+            }
+        }
+
+        System.out.println("NordWest");
+        while (true) {
+            System.out.println(getNordWest(spielfeld, input.nextInt(), input.nextInt(), true));
+
+            if (input.nextBoolean()) {
+                break;
+            }
+        }
+
+        System.out.println("SüdOst");
+        while (true) {
+            System.out.println(getSüdOst(spielfeld, input.nextInt(), input.nextInt(), true));
+
+            if (input.nextBoolean()) {
+                break;
+            }
+        }
+
+        System.out.println("SüdWest");
+        while (true) {
+            System.out.println(getSüdWest(spielfeld, input.nextInt(), input.nextInt(), true));
+
+            if (input.nextBoolean()) {
+                break;
+            }
+        }*/
     }
 }
