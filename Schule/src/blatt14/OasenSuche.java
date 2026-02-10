@@ -64,7 +64,15 @@ public class OasenSuche {
     public static void findeWasser(char[][] charr, int energie) {
         int[] position = new int[2];
         while (energie > 0) {
-            if (Simulationen.zaehlenVier(charr, ))
+            if (Simulationen.zaehlenVier(charr, position[0], position[1], '2', true) != 0) {
+                if (Simulationen.zaehlenVier(charr, position[0], position[1], '8', true) == 4) {
+                    System.out.println("Achievemt Aquired: eingegrabener Bin Laden");
+                    break;
+                }
+            } else {
+                System.out.println("gluck gluck");
+                break;
+            }
         }
     }
 
@@ -73,10 +81,10 @@ public class OasenSuche {
 
     public static void main(String[] args) {
         SchischVisualizer danny = new SchischVisualizer();
-        char[][] spielfeld = initialisiereSpielfeld(25, 20);
+        char[][] spielfeld = initialisiereSpielfeld(60, 60);
         zufallsPositionSpieler(spielfeld);
-        wasserZufall(spielfeld, 0.333);
-        steinZufall(spielfeld, 0.333);
+        wasserZufall(spielfeld, 0.03);
+        steinZufall(spielfeld, 0.15);
 
         danny.step(spielfeld);
 
