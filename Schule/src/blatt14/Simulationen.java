@@ -82,7 +82,7 @@ public class Simulationen {
     public static char getNorden(char[][] charr, int koord1, int koord2, boolean rand) {
         if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
             System.out.println("Koordinaten ungültig");
-            return ' ';
+            return '§';
         }
         try {
             return charr[koord1][koord2-1];
@@ -108,7 +108,7 @@ public class Simulationen {
     public static char getOsten(char[][] charr, int koord1, int koord2, boolean rand) {
         if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
             System.out.println("Koordinaten ungültig");
-            return ' ';
+            return '§';
         }
         try {
             return charr[koord1+1][koord2];
@@ -135,7 +135,7 @@ public class Simulationen {
     public static char getSüden(char[][] charr, int koord1, int koord2, boolean rand) {
         if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
             System.out.println("Koordinaten ungültig");
-            return ' ';
+            return '§';
         }
         try {
             return charr[koord1][koord2+1];
@@ -161,7 +161,7 @@ public class Simulationen {
     public static char getWesten(char[][] charr, int koord1, int koord2, boolean rand) {
         if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
             System.out.println("Koordinaten ungültig");
-            return ' ';
+            return '§';
         }
         try {
             return charr[koord1-1][koord2];
@@ -188,7 +188,7 @@ public class Simulationen {
     public static char getNordOst(char[][] charr, int koord1, int koord2, boolean rand) {
         if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
             System.out.println("Koordinaten ungültig");
-            return ' ';
+            return '§';
         }
         try {
             return charr[koord1+1][koord2-1];
@@ -223,7 +223,7 @@ public class Simulationen {
     public static char getNordWest(char[][] charr, int koord1, int koord2, boolean rand) {
         if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
             System.out.println("Koordinaten ungültig");
-            return ' ';
+            return '§';
         }
         try {
             return charr[koord1-1][koord2-1];
@@ -257,7 +257,7 @@ public class Simulationen {
     public static char getSüdOst(char[][] charr, int koord1, int koord2, boolean rand) {
         if (koord1 >= charr.length || koord2 >= charr[koord1].length) {
             System.out.println("Koordinaten ungültig");
-            return ' ';
+            return '§';
         }
         try {
             return charr[koord1+1][koord2+1];
@@ -293,7 +293,7 @@ public class Simulationen {
     public static char getSüdWest(char[][] charr, int x, int y, boolean rand) {
         if (x >= charr.length || y >= charr[x].length) {
             System.out.println("Koordinaten ungültig");
-            return ' ';
+            return '§';
         }
         try {
             return charr[x -1][y +1];
@@ -315,9 +315,15 @@ public class Simulationen {
     }
 
 
-
-
-
+    /**
+     * zählt wie oft sich ein gesuchtes Feld neben einer gegebenen Position befindet
+     * @param charr spielfeld
+     * @param x x-Koordinate
+     * @param y y-koordinate
+     * @param ziel wonach gesucht wird
+     * @param rand ob über den rand hinweggeblickt wird
+     * @return wie oft sich das feld neben der position befindet
+     */
     public static int zaehlenVier(char[][] charr, int x, int y, char ziel, boolean rand) {
         if (ziel == '§') {
             System.out.println("Das ist mein error symbol du dödel");
@@ -346,6 +352,15 @@ public class Simulationen {
 
 
 
+    /**
+     * zählt wie oft sich ein gesuchtes Feld um eine gegebenen Position herum befindet
+     * @param charr spielfeld
+     * @param x x-Koordinate
+     * @param y y-koordinate
+     * @param ziel wonach gesucht wird
+     * @param rand ob über den rand hinweggeblickt wird
+     * @return wie oft sich das feld um der position herum befindet
+     */
     public static int zaehlenAcht(char[][] charr, int x, int y, char ziel, boolean rand) {
         if (ziel == '§') {
             System.out.println("Das ist mein error symbol du dödel");
@@ -381,6 +396,19 @@ public class Simulationen {
             z++;
         }
         return z;
+    }
+
+
+    public static int[] findeIrgendwas(char[][] charr, char ziel) {
+        for (int i = 0; i < charr.length; i++) {
+            for (int j = 0; j < charr[i].length; j++) {
+                if (charr[i][j] == ziel) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        System.out.println("Position nicht gefunden");
+        return null;
     }
 
 
