@@ -1,9 +1,12 @@
 package blatt13;
 
 public class test {
+    public static void lel(int[] lol, int lül) {
+        lol[lül] = 69;
+    }
     public static void main(String[] args) {
-        for (double i = 0; i < 1; i += 0.00001) {
-            System.out.printf("%.5f\n", i*i);
-        }
+        int[] lul = new int[] {1,2,3,4,5,6,7,8,9,10};
+        lel(lul, 2);
+        blatt07.ArbeitMitArrays.printArray(lul);
     }
 }

@@ -245,6 +245,74 @@ public class Simulationen {
     }
 
 
+    /**
+     * führt eine Bewegung aus
+     * @param spielfeld das Spielfeld (mit Spieler)
+     * @param pos die Position des Spielers
+     * @param richtung wohin der Spieler soll (N/O/S/W)
+     * @param rand ob der spieler über den Rand hüpfen darf
+     * @return das Spielfeld mit bewegtem Spieler
+     */
+    public static char[][] bewegung(char[][] spielfeld, int[] pos, char richtung, boolean rand) {
+        if (pos[0] >= spielfeld.length) {
+            System.out.println("Koordinaten ungültig");
+            return spielfeld;
+        } else if (pos[1] >= spielfeld[pos[0]].length) {
+            System.out.println("Koordinaten ungültig");
+            return spielfeld;
+        }
+
+        spielfeld[pos[0]][pos[1]] = '0';
+
+        if (richtung == 'S') {
+            pos[1]++;
+            if (pos[1] == spielfeld[pos[0]].length) {
+                if (rand) {
+                    pos[1] = 0;
+                } else {
+                    System.out.println("boing");
+                    pos[1]--;
+                }
+            }
+        } else if (richtung == 'O') {
+            pos[0]++;
+            if (pos[0] == spielfeld.length) {
+                if (rand) {
+                    pos[0] = 0;
+                } else {
+                    System.out.println("boing");
+                    pos[0]--;
+                }
+            }
+        } else if (richtung == 'N') {
+            pos[1]--;
+            if (pos[1] < 0) {
+                if (rand) {
+                    pos[1] = spielfeld[pos[0]].length - 1;
+                } else {
+                    System.out.println("boing");
+                    pos[1]++;
+                }
+            }
+        } else if (richtung == 'W') {
+            pos[0]--;
+            if (pos[0] < 0) {
+                if (rand) {
+                    pos[0] = spielfeld.length - 1;
+                } else {
+                    System.out.println("boing");
+                    pos[0]++;
+                }
+            }
+        } else {
+            System.out.println("ungültige Bewegungsanweisung");
+            return spielfeld;
+        }
+        spielfeld[pos[0]][pos[1]] = 'P';
+        return spielfeld;
+    }
+
+
 
     /**
      * gibt die Position südöstlich einer gegebenen Position zurück
@@ -399,6 +467,12 @@ public class Simulationen {
     }
 
 
+    /**
+     * findet die Position von einem gesuchten Objekt (max. eine Position)
+     * @param charr das Spielfeld
+     * @param ziel das gesuchte Objekt
+     * @return die Koordinaten ([0]=x;[1]=y)
+     */
     public static int[] findeIrgendwas(char[][] charr, char ziel) {
         for (int i = 0; i < charr.length; i++) {
             for (int j = 0; j < charr[i].length; j++) {

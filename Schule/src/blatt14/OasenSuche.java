@@ -2,6 +2,8 @@ package blatt14;
 
 import schisch_visualizer.SchischVisualizer;
 
+import java.util.Scanner;
+
 public class OasenSuche {
 
 
@@ -61,20 +63,34 @@ public class OasenSuche {
 
 
 
-    public static void findeWasser(char[][] charr, int energie) {
-        int[] position = new int[2];
+    public static void findeWasser(char[][] spielfeld, int energie) {
+        Scanner sc = new Scanner(System.in);
+        int respect = 0;
+        char[] laufen = new char[] {'N', 'O', 'S', 'W'};
+        int[] position = Simulationen.findeIrgendwas(spielfeld, 'P');
         while (energie > 0) {
-            if (Simulationen.zaehlenVier(charr, position[0], position[1], '2', true) != 0) {
-                if (Simulationen.zaehlenVier(charr, position[0], position[1], '8', true) == 4) {
-                    System.out.println("Achievemt Aquired: eingegrabener Bin Laden");
+            if (Simulationen.zaehlenVier(spielfeld, position[0], position[1], '2', true) != 0) {
+                if (Simulationen.zaehlenVier(spielfeld, position[0], position[1], '8', true) == 4) {
+                    System.out.println("Achievemt aquired: eingegrabener Osama");
                     break;
                 }
             } else {
                 System.out.println("gluck gluck");
                 break;
             }
+            if (Simulationen.getNorden(spielfeld, position[0], position[1], true) != '8' & != '3') {
+                if (Simulationen.getNorden(spielfeld, position[0], position[1], true) != '3') {
+
+                }
+            }
+        }
+        System.out.println("Achievemt aquired: Afrikaner ohne Wasser");
+        if (sc.next().toUpperCase().charAt(0)=='F') {
+            respect++;
         }
     }
+
+
 
 
 
