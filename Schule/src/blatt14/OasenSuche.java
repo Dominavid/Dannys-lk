@@ -65,32 +65,132 @@ public class OasenSuche {
 
     public static void findeWasser(char[][] spielfeld, int energie) {
         Scanner sc = new Scanner(System.in);
+        SchischVisualizer danny = new SchischVisualizer();
         int respect = 0;
         char[] laufen = new char[] {'N', 'O', 'S', 'W'};
-        int[] position = Simulationen.findeIrgendwas(spielfeld, 'P');
+        boolean durst = true;
+        danny.step(spielfeld);
+
         while (energie > 0) {
-            if (Simulationen.zaehlenVier(spielfeld, position[0], position[1], '2', true) != 0) {
+            int[] position = Simulationen.findeIrgendwas(spielfeld, 'P');
+
+            if (Simulationen.zaehlenVier(spielfeld, position[0], position[1], '2', true) == 0) {
                 if (Simulationen.zaehlenVier(spielfeld, position[0], position[1], '8', true) == 4) {
-                    System.out.println("Achievemt aquired: eingegrabener Osama");
+                    System.out.println("Achievent aquired: eingegrabener Osama");
                     break;
                 }
             } else {
                 System.out.println("gluck gluck");
+                durst = false;
                 break;
             }
-            if (Simulationen.getNorden(spielfeld, position[0], position[1], true) != '8' & != '3') {
-                if (Simulationen.getNorden(spielfeld, position[0], position[1], true) != '3') {
 
-                }
+            if (Simulationen.getNorden(spielfeld, position[0], position[1], true) != '8' && Simulationen.getNorden(spielfeld, position[0], position[1], true) != '7') {
+                int x = position[0];
+                int y = position[1];
+                Simulationen.bewegung(spielfeld, position, 'N', true);
+                spielfeld[x][y] = '7';
+            } else if (Simulationen.getOsten(spielfeld, position[0], position[1], true) != '8' && Simulationen.getOsten(spielfeld, position[0], position[1], true) != '7') {
+                int x = position[0];
+                int y = position[1];
+                Simulationen.bewegung(spielfeld, position, 'O', true);
+                spielfeld[x][y] = '7';
+            } else if (Simulationen.getSüden(spielfeld, position[0], position[1], true) != '8' && Simulationen.getSüden(spielfeld, position[0], position[1], true) != '7') {
+                int x = position[0];
+                int y = position[1];
+                Simulationen.bewegung(spielfeld, position, 'S', true);
+                spielfeld[x][y] = '7';
+            } else if (Simulationen.getWesten(spielfeld, position[0], position[1], true) != '8' && Simulationen.getWesten(spielfeld, position[0], position[1], true) != '7') {
+                int x = position[0];
+                int y = position[1];
+                Simulationen.bewegung(spielfeld, position, 'W', true);
+                spielfeld[x][y] = '7';
+            } else if (Simulationen.zaehlenVier(spielfeld, position[0], position[1], '8', true) + Simulationen.zaehlenVier(spielfeld, position[0], position[1], '7', true) == 4) {
+                softlock(spielfeld, energie, position, true, danny);
+
+
+            }
+
+            danny.step(spielfeld);
+            energie--;
+        }
+
+        danny.start();
+
+        if (durst) {
+            System.out.println("Achievent aquired: Afrika");
+            //danny.start();
+            if (sc.next().toUpperCase().charAt(0)=='F') {
+                respect++;
             }
         }
-        System.out.println("Achievemt aquired: Afrikaner ohne Wasser");
-        if (sc.next().toUpperCase().charAt(0)=='F') {
-            respect++;
-        }
+
     }
 
 
+
+    public static void softlock(char[][] spielfeld, int energie, int[] position, boolean rand, SchischVisualizer danny) { //todo prüfen
+        char richtung = 'W';
+        while (energie > 0) {
+            if (Simulationen.getWesten(spielfeld, position[0], position[1], rand) != '8' && richtung == 'W') {
+                int x = position[0];
+                int y = position[1];
+                Simulationen.bewegung(spielfeld, position, 'W', rand);
+                spielfeld[x][y] = '7';
+                richtung = 'W';
+            } else if (Simulationen.getSüden(spielfeld, position[0], position[1], rand) != '8' && richtung == 'S') {
+                int x = position[0];
+                int y = position[1];
+                Simulationen.bewegung(spielfeld, position, 'S', rand);
+                spielfeld[x][y] = '7';
+                richtung = 'S';
+            } else if (Simulationen.getOsten(spielfeld, position[0], position[1], rand) != '8' && richtung == 'O') {
+                int x = position[0];
+                int y = position[1];
+                Simulationen.bewegung(spielfeld, position, 'O', true);
+                spielfeld[x][y] = '7';
+                richtung = 'O';
+            } else if (Simulationen.getNorden(spielfeld, position[0], position[1], rand) != '8' && richtung == 'N') {
+                int x = position[0];
+                int y = position[1];
+                Simulationen.bewegung(spielfeld, position, 'N', rand);
+                spielfeld[x][y] = '7';
+                richtung = 'N';
+            } else {
+                if (Simulationen.getNorden(spielfeld, position[0], position[1], rand) != '8') {
+                    int x = position[0];
+                    int y = position[1];
+                    Simulationen.bewegung(spielfeld, position, 'W', rand);
+                    spielfeld[x][y] = '7';
+                    richtung = 'N';
+                } else if (Simulationen.getOsten(spielfeld, position[0], position[1], rand) != '8') {
+                    int x = position[0];
+                    int y = position[1];
+                    Simulationen.bewegung(spielfeld, position, 'S', rand);
+                    spielfeld[x][y] = '7';
+                    richtung = 'S';
+                } else if (Simulationen.getSüden(spielfeld, position[0], position[1], rand) != '8') {
+                    int x = position[0];
+                    int y = position[1];
+                    Simulationen.bewegung(spielfeld, position, 'O', rand);
+                    spielfeld[x][y] = '7';
+                    richtung = 'O';
+                } else if (Simulationen.getWesten(spielfeld, position[0], position[1], rand) != '8') {
+                    int x = position[0];
+                    int y = position[1];
+                    Simulationen.bewegung(spielfeld, position, 'N', rand);
+                    spielfeld[x][y] = '7';
+                    richtung = 'N';
+                }
+            }
+            danny.step(spielfeld);
+            if (Simulationen.zaehlenVier(spielfeld, position[0], position[1], '8', true) + Simulationen.zaehlenVier(spielfeld, position[0], position[1], '7', true) != 4) {
+                break;
+            }
+            //System.out.println(energie);
+            energie--;
+        }
+    }
 
 
 
@@ -99,11 +199,15 @@ public class OasenSuche {
         SchischVisualizer danny = new SchischVisualizer();
         char[][] spielfeld = initialisiereSpielfeld(60, 60);
         zufallsPositionSpieler(spielfeld);
-        wasserZufall(spielfeld, 0.03);
+        wasserZufall(spielfeld, 0.00);
         steinZufall(spielfeld, 0.15);
 
-        danny.step(spielfeld);
+        //danny.step(spielfeld);
 
-        danny.start();
+        for (int i = 0; i < 1; i++) {
+            findeWasser(spielfeld, 5000);
+        }
+
+        //danny.start();
     }
 }
