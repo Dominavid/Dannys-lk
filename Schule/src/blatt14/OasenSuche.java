@@ -62,7 +62,11 @@ public class OasenSuche {
     }
 
 
-
+    /**
+     * simuliert die suche nach wasser
+     * @param spielfeld das spielfeld
+     * @param energie wie viele schritte man gehen kann
+     */
     public static void findeWasser(char[][] spielfeld, int energie) {
         Scanner sc = new Scanner(System.in);
         SchischVisualizer danny = new SchischVisualizer();
@@ -106,14 +110,81 @@ public class OasenSuche {
                 Simulationen.bewegung(spielfeld, position, 'W', true);
                 spielfeld[x][y] = '7';
             } else if (Simulationen.zaehlenVier(spielfeld, position[0], position[1], '8', true) + Simulationen.zaehlenVier(spielfeld, position[0], position[1], '7', true) == 4) {
-                softlock(spielfeld, energie, position, true, danny);
 
+                //softlock ist hier
 
+                char richtung = 'W';
+                while (energie > 0) {
+                    if (Simulationen.getWesten(spielfeld, position[0], position[1], true) != '8' && richtung == 'W') {
+                        int x = position[0];
+                        int y = position[1];
+                        Simulationen.bewegung(spielfeld, position, 'W', true);
+                        spielfeld[x][y] = '7';
+                        richtung = 'W';
+                    } else if (Simulationen.getSüden(spielfeld, position[0], position[1], true) != '8' && richtung == 'S') {
+                        int x = position[0];
+                        int y = position[1];
+                        Simulationen.bewegung(spielfeld, position, 'S', true);
+                        spielfeld[x][y] = '7';
+                        richtung = 'S';
+                    } else if (Simulationen.getOsten(spielfeld, position[0], position[1], true) != '8' && richtung == 'O') {
+                        int x = position[0];
+                        int y = position[1];
+                        Simulationen.bewegung(spielfeld, position, 'O', true);
+                        spielfeld[x][y] = '7';
+                        richtung = 'O';
+                    } else if (Simulationen.getNorden(spielfeld, position[0], position[1], true) != '8' && richtung == 'N') {
+                        int x = position[0];
+                        int y = position[1];
+                        Simulationen.bewegung(spielfeld, position, 'N', true);
+                        spielfeld[x][y] = '7';
+                        richtung = 'N';
+                    } else {
+                        if (Simulationen.getNorden(spielfeld, position[0], position[1], true) != '8') {
+                            int x = position[0];
+                            int y = position[1];
+                            Simulationen.bewegung(spielfeld, position, 'N', true);
+                            spielfeld[x][y] = '7';
+                            richtung = 'N';
+                        } else if (Simulationen.getOsten(spielfeld, position[0], position[1], true) != '8') {
+                            int x = position[0];
+                            int y = position[1];
+                            Simulationen.bewegung(spielfeld, position, 'O', true);
+                            spielfeld[x][y] = '7';
+                            richtung = 'O';
+                        } else if (Simulationen.getSüden(spielfeld, position[0], position[1], true) != '8') {
+                            int x = position[0];
+                            int y = position[1];
+                            Simulationen.bewegung(spielfeld, position, 'S', true);
+                            spielfeld[x][y] = '7';
+                            richtung = 'S';
+                        } else if (Simulationen.getWesten(spielfeld, position[0], position[1], true) != '8') {
+                            int x = position[0];
+                            int y = position[1];
+                            Simulationen.bewegung(spielfeld, position, 'W', true);
+                            spielfeld[x][y] = '7';
+                            richtung = 'W';
+                        }
+                    }
+                    if (energie > 0) {
+                    danny.step(spielfeld);
+                    }
+                    if (Simulationen.zaehlenVier(spielfeld, position[0], position[1], '8', true) + Simulationen.zaehlenVier(spielfeld, position[0], position[1], '7', true) != 4) {
+                        break;
+                    }
+                    //System.out.println(energie);
+                    energie--;
+                }
             }
-
-            danny.step(spielfeld);
+            if (energie > 0) {
+                danny.step(spielfeld);
+            }
             energie--;
         }
+
+        //hier ist softlock vorbei
+
+
 
         danny.start();
 
@@ -125,71 +196,6 @@ public class OasenSuche {
             }
         }
 
-    }
-
-
-
-    public static void softlock(char[][] spielfeld, int energie, int[] position, boolean rand, SchischVisualizer danny) { //todo prüfen
-        char richtung = 'W';
-        while (energie > 0) {
-            if (Simulationen.getWesten(spielfeld, position[0], position[1], rand) != '8' && richtung == 'W') {
-                int x = position[0];
-                int y = position[1];
-                Simulationen.bewegung(spielfeld, position, 'W', rand);
-                spielfeld[x][y] = '7';
-                richtung = 'W';
-            } else if (Simulationen.getSüden(spielfeld, position[0], position[1], rand) != '8' && richtung == 'S') {
-                int x = position[0];
-                int y = position[1];
-                Simulationen.bewegung(spielfeld, position, 'S', rand);
-                spielfeld[x][y] = '7';
-                richtung = 'S';
-            } else if (Simulationen.getOsten(spielfeld, position[0], position[1], rand) != '8' && richtung == 'O') {
-                int x = position[0];
-                int y = position[1];
-                Simulationen.bewegung(spielfeld, position, 'O', true);
-                spielfeld[x][y] = '7';
-                richtung = 'O';
-            } else if (Simulationen.getNorden(spielfeld, position[0], position[1], rand) != '8' && richtung == 'N') {
-                int x = position[0];
-                int y = position[1];
-                Simulationen.bewegung(spielfeld, position, 'N', rand);
-                spielfeld[x][y] = '7';
-                richtung = 'N';
-            } else {
-                if (Simulationen.getNorden(spielfeld, position[0], position[1], rand) != '8') {
-                    int x = position[0];
-                    int y = position[1];
-                    Simulationen.bewegung(spielfeld, position, 'W', rand);
-                    spielfeld[x][y] = '7';
-                    richtung = 'N';
-                } else if (Simulationen.getOsten(spielfeld, position[0], position[1], rand) != '8') {
-                    int x = position[0];
-                    int y = position[1];
-                    Simulationen.bewegung(spielfeld, position, 'S', rand);
-                    spielfeld[x][y] = '7';
-                    richtung = 'S';
-                } else if (Simulationen.getSüden(spielfeld, position[0], position[1], rand) != '8') {
-                    int x = position[0];
-                    int y = position[1];
-                    Simulationen.bewegung(spielfeld, position, 'O', rand);
-                    spielfeld[x][y] = '7';
-                    richtung = 'O';
-                } else if (Simulationen.getWesten(spielfeld, position[0], position[1], rand) != '8') {
-                    int x = position[0];
-                    int y = position[1];
-                    Simulationen.bewegung(spielfeld, position, 'N', rand);
-                    spielfeld[x][y] = '7';
-                    richtung = 'N';
-                }
-            }
-            danny.step(spielfeld);
-            if (Simulationen.zaehlenVier(spielfeld, position[0], position[1], '8', true) + Simulationen.zaehlenVier(spielfeld, position[0], position[1], '7', true) != 4) {
-                break;
-            }
-            //System.out.println(energie);
-            energie--;
-        }
     }
 
 
