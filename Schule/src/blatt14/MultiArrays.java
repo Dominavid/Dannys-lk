@@ -165,6 +165,20 @@ public class MultiArrays {
     }
 
 
+
+    public static char[][] arraydreher(char[][] charr) {
+        char[][] zarr = new char[charr[0].length][charr.length];
+
+        for (int i = 0; i < charr.length; i++) {
+            for (int j = 0; j < charr[i].length; j++) {
+                zarr[j][i] = charr[i][j];
+            }
+        }
+
+        return zarr;
+    }
+
+
     public static void main(String[] args) {
         int[][] arr = {{1,2,5,3,2,1,6},{3,4,6,34,3,7,3},{5,6,6,433,5,3},{1,3,6,43,5,5},{9,6,4,63,25,4}};
         print2DArray(createRandom2DIntArray(8,8,13,2));

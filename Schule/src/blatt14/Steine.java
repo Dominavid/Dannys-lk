@@ -2,9 +2,13 @@ package blatt14;
 
 import schisch_visualizer.SchischVisualizer;
 
+import java.util.Arrays;
+
 public class Steine {
 
     static char[][] spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
+    static SchischVisualizer danny = new SchischVisualizer();
+    static int punkte = 0;
 
 
     /**
@@ -100,29 +104,6 @@ public class Steine {
                     spielfeld[i][1] = '9';
                 }
             }
-        }
-    }
-
-
-
-
-
-
-    public static void checkerCan() {
-        int höhe = 0;
-        for (int i = spielfeld[0].length; i > 0; i--) {
-            boolean stop = false;
-            for (int j = 0; j < spielfeld.length; j++) {
-                if (spielfeld[i][j] != ' ') {
-                    höhe = i;
-                    stop = true;
-                    break;
-                }
-            }
-            if (stop) break;
-        } //todo: die scheiße machen#
-        for (int i = spielfeld[0].length; i > 0; i--) {
-            fo
         }
     }
 
@@ -228,64 +209,85 @@ public class Steine {
 
 
 
+    public static void reihenlöscher() {
+        char[][] spielfelddreh = MultiArrays.arraydreher(spielfeld);
+        int blinken = 3;
+        int reihenzähler = 0;
+        int[] reihen = new int[4];
+        for (int i = spielfelddreh.length-1; i > 0; i--) {
+            boolean leer = false;
+            for (int j = 0; j < spielfelddreh[i].length; j++) {
+                if (spielfelddreh[i][j] == ' ') {
+                    leer = true;
+                    break;
+                }
+            }
+            if (!leer) {
+                reihen[reihenzähler] = i;
+                reihenzähler++;
+                if (reihenzähler == 4) break;
+            }
+        } //zu löschende Reihen aufgeschrieben
+
+        if (reihenzähler > 0) {
+            char[] leer = new char[spielfeld.length];
+            Arrays.fill(leer, ' ');
+
+            char[][] reihe = new char[4][];
+            for (int i = 0; i < reihenzähler; i++) {
+                reihe[i] = spielfelddreh[reihen[i]].clone();
+            }
+
+            if (reihenzähler == 1) {
+                punkte += 40;
+                //System.out.println("+40 Punkte\nGesamtpunktzahl: " + punkte);
+            } else if (reihenzähler == 2) {
+                punkte += 100;
+                //System.out.println("+100 Punkte\nGesamtpunktzahl: " + punkte);
+            } else if (reihenzähler == 3) {
+                punkte += 300;
+                //System.out.println("+300 Punkte\nGesamtpunktzahl: " + punkte);
+            } else if (reihenzähler == 4) {
+                punkte += 1200;
+                //System.out.println("+1200 Punkte\nGesamtpunktzahl: " + punkte);
+            } else {
+                System.out.println("Schere: mehr als 4 volle Reihen erkannt");
+                return;
+            }
+
+            for (int i = 0; i <= blinken; i++) {
+                for (int j = 0; j < reihenzähler; j++) {
+                    spielfelddreh[reihen[j]] = reihe[j];
+                }
+                danny.step(MultiArrays.arraydreher(spielfelddreh));
+                for (int j = 0; j < reihenzähler; j++) {
+                    spielfelddreh[reihen[j]] = leer;
+                }
+                danny.step(MultiArrays.arraydreher(spielfelddreh));
+            }
+
+            for (int j = reihenzähler-1; j >= 0; j--) {
+                for (int i = reihen[j]; i > 0; i--) {
+                    spielfelddreh[i] = spielfelddreh[i-1].clone();
+                }
+                Arrays.fill(spielfelddreh[0], ' ');
+            }
+            spielfeld = MultiArrays.arraydreher(spielfelddreh);
+        }
+    }
+
+
+
     public static void main(String[] args) {
-        SchischVisualizer danny = new SchischVisualizer();
-        zeichneI(3, true);
+
+
         danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneI(3, false);
+
+
+        reihenlöscher();
         danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneO(3);
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneT(3, 'N');
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneT(3, 'O');
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneT(3, 'S');
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneT(3, 'W');
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneS(3, true);
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneS(3, false);
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneZ(3, true);
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneZ(3, false);
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneJ(3, 'N');
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneJ(3, 'O');
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneJ(3, 'S');
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneJ(3, 'W');
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneL(3, 'N');
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneL(3, 'O');
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneL(3, 'S');
-        danny.step(spielfeld);
-        spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
-        zeichneL(3, 'w');
-        danny.step(spielfeld);
+
+
         danny.start();
     }
 }

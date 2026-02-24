@@ -113,32 +113,49 @@ public class OasenSuche {
 
                 //softlock ist hier
 
+                int schritteineinerichtung = 0;
                 char richtung = 'W';
                 while (energie > 0) {
+                    if (schritteineinerichtung >= ((int)(Math.random()*20))+5) {
+                        schritteineinerichtung = 0;
+                        if (richtung == 'N') {
+                            richtung = 'O';
+                        } else if (richtung == 'O') {
+                            richtung = 'S';
+                        } else if (richtung == 'S') {
+                            richtung = 'W';
+                        } else if (richtung == 'W') {
+                            richtung = 'N';
+                        }
+                    }
                     if (Simulationen.getWesten(spielfeld, position[0], position[1], true) != '8' && richtung == 'W') {
                         int x = position[0];
                         int y = position[1];
                         Simulationen.bewegung(spielfeld, position, 'W', true);
                         spielfeld[x][y] = '7';
                         richtung = 'W';
+                        schritteineinerichtung++;
                     } else if (Simulationen.getSüden(spielfeld, position[0], position[1], true) != '8' && richtung == 'S') {
                         int x = position[0];
                         int y = position[1];
                         Simulationen.bewegung(spielfeld, position, 'S', true);
                         spielfeld[x][y] = '7';
                         richtung = 'S';
+                        schritteineinerichtung++;
                     } else if (Simulationen.getOsten(spielfeld, position[0], position[1], true) != '8' && richtung == 'O') {
                         int x = position[0];
                         int y = position[1];
                         Simulationen.bewegung(spielfeld, position, 'O', true);
                         spielfeld[x][y] = '7';
                         richtung = 'O';
+                        schritteineinerichtung++;
                     } else if (Simulationen.getNorden(spielfeld, position[0], position[1], true) != '8' && richtung == 'N') {
                         int x = position[0];
                         int y = position[1];
                         Simulationen.bewegung(spielfeld, position, 'N', true);
                         spielfeld[x][y] = '7';
                         richtung = 'N';
+                        schritteineinerichtung++;
                     } else {
                         if (Simulationen.getNorden(spielfeld, position[0], position[1], true) != '8') {
                             int x = position[0];
@@ -203,10 +220,10 @@ public class OasenSuche {
 
     public static void main(String[] args) {
         SchischVisualizer danny = new SchischVisualizer();
-        char[][] spielfeld = initialisiereSpielfeld(60, 60);
+        char[][] spielfeld = initialisiereSpielfeld(25, 25);
         zufallsPositionSpieler(spielfeld);
         wasserZufall(spielfeld, 0.00);
-        steinZufall(spielfeld, 0.15);
+        steinZufall(spielfeld, 0.0);
 
         //danny.step(spielfeld);
 
