@@ -1,7 +1,6 @@
 package blatt14;
 
 import schisch_visualizer.SchischVisualizer;
-
 import java.util.Arrays;
 
 public class Steine {
@@ -9,6 +8,9 @@ public class Steine {
     static char[][] spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
     static SchischVisualizer danny = new SchischVisualizer();
     static int punkte = 0;
+    static int[][] koord = new int[4][2];
+    static boolean lebt = true;
+
 
 
     /**
@@ -23,10 +25,12 @@ public class Steine {
             if (vert) {
                 for (int i = 0; i < 4; i++) {
                     spielfeld[pos][i] = '6';
+                    koord[i] = new int[] {pos, i};
                 }
             } else {
                 for (int i = pos; i < pos+4; i++) {
                     spielfeld[i][0] = '6';
+                    koord[i] = new int[] {pos, i};
                 }
             }
         }
@@ -45,6 +49,7 @@ public class Steine {
             spielfeld[pos+1][0] = '5';
             spielfeld[pos][1] = '5';
             spielfeld[pos+1][1] = '5';
+            koord = new int[][] {{pos, 0}, {pos+1, 0}, {pos, 1}, {pos+1, 1}};
         }
     }
 
@@ -61,23 +66,31 @@ public class Steine {
         } else {
             if (richt == 'N') {
                 spielfeld[pos+1][0] = 'C';
+                koord[0] = new int[] {pos+1, 0};
                 for (int i = pos; i < pos+3; i++) {
                     spielfeld[i][1] = 'C';
+                    koord[i+1-pos] = new int[] {i, 1};
                 }
             } else if (richt == 'O') {
                 spielfeld[pos+1][1] = 'C';
+                koord[0] = new int[] {pos+1, 1};
                 for (int i = 0; i < 3; i++) {
                     spielfeld[pos][i] = 'C';
+                    koord[i+1] = new int[] {pos, i};
                 }
             } else if (richt == 'S') {
                 spielfeld[pos+1][1] = 'C';
+                koord[0] = new int[] {pos+1, 1};
                 for (int i = pos; i < pos+3; i++) {
                     spielfeld[i][0] = 'C';
+                    koord[i+1-pos] = new int[] {i, 0};
                 }
             } else if (richt == 'W') {
                 spielfeld[pos][1] = 'C';
+                koord[0] = new int[] {pos, 1};
                 for (int i = 0; i < 3; i++) {
                     spielfeld[pos+1][i] = 'C';
+                    koord[i+1] = new int[] {pos+1, i};
                 }
             }
         }
@@ -97,17 +110,19 @@ public class Steine {
                 for (int i = 0; i < 2; i++) {
                     spielfeld[pos][i] = '9';
                     spielfeld[pos+1][i+1] = '9';
+                    koord[i*2] = new int[] {pos, i};
+                    koord[i*2+1] = new int[] {pos+1, i+1};
                 }
             } else {
                 for (int i = pos; i < pos + 2; i++) {
                     spielfeld[i+1][0] = '9';
                     spielfeld[i][1] = '9';
+                    koord[(i-pos)*2] = new int[] {i+1, 0};
+                    koord[(i-pos)*2+1] = new int[] {i, 1};
                 }
             }
         }
     }
-
-
 
 
     /**
@@ -123,17 +138,19 @@ public class Steine {
                 for (int i = 0; i < 2; i++) {
                     spielfeld[pos+1][i] = 'F';
                     spielfeld[pos][i+1] = 'F';
+                    koord[i*2] = new int[] {pos+1, i};
+                    koord[i*2+1] = new int[] {pos, i+1};
                 }
             } else {
                 for (int i = pos; i < pos + 2; i++) {
                     spielfeld[i][0] = 'F';
                     spielfeld[i+1][1] = 'F';
+                    koord[(i-pos)*2] = new int[] {i, 0};
+                    koord[(i-pos)*2+1] = new int[] {i+1, 1};
                 }
             }
         }
     }
-
-
 
 
     /**
@@ -148,29 +165,35 @@ public class Steine {
         } else {
             if (richt == 'N') {
                 spielfeld[pos][0] = '2';
+                koord[0] = new int[] {pos, 0};
                 for (int i = pos; i < pos+3; i++) {
                     spielfeld[i][1] = '2';
+                    koord[i+1-pos] = new int[] {i, 1};
                 }
             } else if (richt == 'O') {
                 spielfeld[pos+1][0] = '2';
+                koord[0] = new int[] {pos+1, 0};
                 for (int i = 0; i < 3; i++) {
                     spielfeld[pos][i] = '2';
+                    koord[i+1] = new int[] {pos, i+1};
                 }
             } else if (richt == 'S') {
                 spielfeld[pos+2][1] = '2';
+                koord[0] = new int[] {pos+2, 1};
                 for (int i = pos; i < pos+3; i++) {
                     spielfeld[i][0] = '2';
+                    koord[i+1-pos] = new int[] {i, 0};
                 }
             } else if (richt == 'W') {
                 spielfeld[pos][2] = '2';
+                koord[0] = new int[] {pos, 2};
                 for (int i = 0; i < 3; i++) {
                     spielfeld[pos+1][i] = '2';
+                    koord[i+1] = new int[] {pos+1, i};
                 }
             }
         }
     }
-
-
 
 
     /**
@@ -185,23 +208,31 @@ public class Steine {
         } else {
             if (richt == 'N') {
                 spielfeld[pos][1] = '4';
+                koord[0] = new int[] {pos, 1};
                 for (int i = pos; i < pos+3; i++) {
                     spielfeld[i][0] = '4';
+                    koord[i+1-pos] = new int[] {i, 0};
                 }
             } else if (richt == 'O') {
                 spielfeld[pos+1][2] = '4';
+                koord[0] = new int[] {pos+1, 2};
                 for (int i = 0; i < 3; i++) {
                     spielfeld[pos][i] = '4';
+                    koord[i+1] = new int[] {pos, i};
                 }
             } else if (richt == 'S') {
                 spielfeld[pos][1] = '4';
+                koord[0] = new int[] {pos, 1};
                 for (int i = pos; i < pos+3; i++) {
                     spielfeld[i][0] = '4';
+                    koord[i+1-pos] = new int[] {i, 0};
                 }
             } else if (richt == 'W') {
                 spielfeld[pos][0] = '4';
+                koord[0] = new int[] {pos, 0};
                 for (int i = 0; i < 3; i++) {
                     spielfeld[pos+1][i] = '4';
+                    koord[i+1] = new int[] {pos+1, i};
                 }
             }
         }
@@ -209,9 +240,13 @@ public class Steine {
 
 
 
-    public static void reihenlöscher() {
+    /**
+     * sucht und entfernt (optional blinkend) leere Reihen, weist Punkte zu und lässt das Spielfeld aufrücken
+     * Spielfeld, Punkte und Visualizer statisch
+     * @param blinken wie oft eine Reihe vor Löschung blinken soll
+     */
+    public static void reihenlöscher(int blinken) {
         char[][] spielfelddreh = MultiArrays.arraydreher(spielfeld);
-        int blinken = 3;
         int reihenzähler = 0;
         int[] reihen = new int[4];
         for (int i = spielfelddreh.length-1; i > 0; i--) {
@@ -259,7 +294,7 @@ public class Steine {
                 for (int j = 0; j < reihenzähler; j++) {
                     spielfelddreh[reihen[j]] = reihe[j];
                 }
-                danny.step(MultiArrays.arraydreher(spielfelddreh));
+                if (i != 0) danny.step(MultiArrays.arraydreher(spielfelddreh));
                 for (int j = 0; j < reihenzähler; j++) {
                     spielfelddreh[reihen[j]] = leer;
                 }
@@ -278,16 +313,73 @@ public class Steine {
 
 
 
+    public static void platzierer(char objekt, int pos, boolean vert) {
+        char[][] spielfeldkopie = spielfeld.clone();
+        if (objekt == 'I') {
+            zeichneI(pos, vert);
+        } else if (objekt == 'S') {
+            zeichneS(pos, vert);
+        } else if (objekt == 'Z') {
+            zeichneZ(pos, vert);
+        } else {
+            System.out.println("Schere: Eingabe fehlerhaft");
+        }
+        for (int j = 0; j < koord.length; j++) {
+            if (spielfeldkopie[koord[j][0]][koord[j][1]] != ' ') lebt = false;
+        } //todo: rüberkopieren
+    }
+
+
+    public static void platzierer(char objekt, int pos, char richt) {
+        char[][] spielfeldkopie = spielfeld.clone();
+        if (objekt == 'T') {
+            zeichneT(pos, richt);
+        } else if (objekt == 'J') {
+            zeichneJ(pos, richt);
+        } else if (objekt == 'L') {
+            zeichneL(pos, richt);
+        } else {
+            System.out.println("Schere: Eingabe fehlerhaft");
+        }
+    }
+
+
+    public static void platzierer(char objekt, int pos) {
+        char[][] spielfeldkopie = spielfeld.clone();
+        if (objekt == 'O') {
+            zeichneO(pos);
+        } else {
+            System.out.println("Schere: Eingabe fehlerhaft");
+        }
+    }
+
+
+    public static void absturz() {
+
+    }
+
+
+
     public static void main(String[] args) {
 
 
         danny.step(spielfeld);
 
 
-        reihenlöscher();
+        /*spielfeld = MultiArrays.arraydreher(spielfeld);
+        Arrays.fill(spielfeld[39], '1');
+        Arrays.fill(spielfeld[33], '1');
+        Arrays.fill(spielfeld[23], '1');
+        OasenSuche.wasserZufall(spielfeld, 0.3);
+        spielfeld = MultiArrays.arraydreher(spielfeld);
+        danny.step(spielfeld);*/
+
+
+        reihenlöscher(2);
         danny.step(spielfeld);
 
 
         danny.start();
+        System.out.println("Euer Exzellenz haben " + punkte + " Punkte erreicht.");
     }
 }
