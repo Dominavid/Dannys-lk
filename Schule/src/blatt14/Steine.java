@@ -1,6 +1,7 @@
 package blatt14;
 
 import schisch_visualizer.SchischVisualizer;
+
 import java.util.Arrays;
 
 public class Steine {
@@ -30,7 +31,7 @@ public class Steine {
             } else {
                 for (int i = pos; i < pos+4; i++) {
                     spielfeld[i][0] = '6';
-                    koord[i] = new int[] {pos, i};
+                    koord[i-pos] = new int[] {i, 0};
                 }
             }
         }
@@ -63,6 +64,7 @@ public class Steine {
         richt = Character.toUpperCase(richt);
         if (pos < 0 || pos+1 >= spielfeld.length || (pos+2 >= spielfeld.length && (richt == 'N' || richt == 'S')) || (richt != 'N' && richt != 'O' && richt != 'S' && richt != 'W')) {
             System.out.println("Schere: richtung/position ungültig");
+            System.out.println(pos);
         } else {
             if (richt == 'N') {
                 spielfeld[pos+1][0] = 'C';
@@ -308,13 +310,15 @@ public class Steine {
                 Arrays.fill(spielfelddreh[0], ' ');
             }
             spielfeld = MultiArrays.arraydreher(spielfelddreh);
+            danny.step(spielfeld);
         }
     }
 
 
-
     public static void platzierer(char objekt, int pos, boolean vert) {
-        char[][] spielfeldkopie = spielfeld.clone();
+
+        char[][] spielfeldkopie = MultiArrays.copy2DCharArray(spielfeld);
+
         if (objekt == 'I') {
             zeichneI(pos, vert);
         } else if (objekt == 'S') {
@@ -324,14 +328,19 @@ public class Steine {
         } else {
             System.out.println("Schere: Eingabe fehlerhaft");
         }
+
         for (int j = 0; j < koord.length; j++) {
             if (spielfeldkopie[koord[j][0]][koord[j][1]] != ' ') lebt = false;
-        } //todo: rüberkopieren
+        }
+
+        danny.step(spielfeld);
     }
 
 
     public static void platzierer(char objekt, int pos, char richt) {
-        char[][] spielfeldkopie = spielfeld.clone();
+
+        char[][] spielfeldkopie = MultiArrays.copy2DCharArray(spielfeld);
+
         if (objekt == 'T') {
             zeichneT(pos, richt);
         } else if (objekt == 'J') {
@@ -341,21 +350,83 @@ public class Steine {
         } else {
             System.out.println("Schere: Eingabe fehlerhaft");
         }
+
+        for (int j = 0; j < koord.length; j++) {
+            if (spielfeldkopie[koord[j][0]][koord[j][1]] != ' ') lebt = false;
+        }
+        danny.step(spielfeld);
     }
 
 
     public static void platzierer(char objekt, int pos) {
-        char[][] spielfeldkopie = spielfeld.clone();
+
+        char[][] spielfeldkopie = MultiArrays.copy2DCharArray(spielfeld);
+
         if (objekt == 'O') {
             zeichneO(pos);
         } else {
             System.out.println("Schere: Eingabe fehlerhaft");
         }
+
+        for (int j = 0; j < koord.length; j++) {
+            if (spielfeldkopie[koord[j][0]][koord[j][1]] != ' ') lebt = false;
+        }
+        danny.step(spielfeld);
     }
 
 
     public static void absturz() {
+        int[][] koordkopie = new int[koord.length][];
 
+        char objekt = spielfeld[koord[0][0]][koord[0][1]];
+
+
+        for (int m = 0; m < spielfeld[0].length; m++) {
+            for (int i = 0; i < koord.length; i++) {
+                koordkopie[i] = new int[] {koord[i][0], koord[i][1]+1};
+                if (koordkopie[i][1] >= spielfeld[koordkopie[i][0]].length) {
+                    //System.out.println("1. Stop");
+                    return;
+                }
+            }
+
+            for (int i = 0; i < koord.length; i++) {
+                for (int j = 0; j < koord.length; j++) {
+                    spielfeld[koord[j][0]][koord[j][1]] = ' ';
+                }
+            }
+
+            for (int j = 0; j < koordkopie.length; j++) {
+                if (spielfeld[koordkopie[j][0]][koordkopie[j][1]] != ' ') {
+                    for (int i = 0; i < koord.length; i++) {
+                        for (int n = 0; n < koord.length; n++) {
+                            spielfeld[koord[n][0]][koord[n][1]] = objekt;
+                        }
+                    }
+                    return;
+                }
+            }
+
+            for (int i = 0; i < koordkopie.length; i++) {
+                for (int n = 0; n < koordkopie.length; n++) {
+                    spielfeld[koordkopie[n][0]][koordkopie[n][1]] = objekt;
+                }
+            }
+
+            koord = koordkopie.clone();
+            danny.step(spielfeld);
+        }
+    }
+
+
+
+    public static void prüfer() {
+        for (int j = 0; j < koord.length; j++) {
+            if (spielfeld[j][0] != ' ') {
+                lebt = false;
+                break;
+            }
+        }
     }
 
 
@@ -363,23 +434,173 @@ public class Steine {
     public static void main(String[] args) {
 
 
-        danny.step(spielfeld);
+
+        long startzeit = System.nanoTime();
+
+        int durchläufe = 0;
 
 
-        /*spielfeld = MultiArrays.arraydreher(spielfeld);
-        Arrays.fill(spielfeld[39], '1');
-        Arrays.fill(spielfeld[33], '1');
-        Arrays.fill(spielfeld[23], '1');
-        OasenSuche.wasserZufall(spielfeld, 0.3);
-        spielfeld = MultiArrays.arraydreher(spielfeld);
-        danny.step(spielfeld);*/
+        int mindestpunkte = 20;
 
 
-        reihenlöscher(2);
-        danny.step(spielfeld);
+        while (true) {
+            while (lebt) {
+                double rand = Math.random();
+                if (rand < (double) 1 / 7) {
+                    boolean vert = Math.random() > 0.5;
+                    int pos;
+                    if (vert) {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 1);
+                    } else {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 4);
+                    }
+                    platzierer('I', pos, vert);
+                } else if (rand < (double) 2 / 7) {
+                    platzierer('O', blatt13.Zufall.zufallGanz(spielfeld.length - 2));
+                } else if (rand < (double) 3 / 7) {
+                    double rando = Math.random();
+                    char richt;
+
+                    if (rando < 1 / 4) {
+                        richt = 'N';
+                    } else if (rando < 2 / 4) {
+                        richt = 'O';
+                    } else if (rando < 3 / 4) {
+                        richt = 'S';
+                    } else {
+                        richt = 'W';
+                    }
+
+                    int pos;
+                    if (richt == 'N' || richt == 'S') {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 3);
+                    } else {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 2);
+                    }
+
+                    platzierer('T', pos, richt);
+                } else if (rand < (double) 4 / 7) {
+                    boolean vert = Math.random() > 0.5;
+                    int pos;
+                    if (vert) {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 2);
+                    } else {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 3);
+                    }
+                    platzierer('S', pos, vert);
+                } else if (rand < (double) 5 / 7) {
+                    boolean vert = Math.random() > 0.5;
+                    int pos;
+                    if (vert) {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 2);
+                    } else {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 3);
+                    }
+                    platzierer('Z', pos, vert);
+                } else if (rand < (double) 6 / 7) {
+                    double rando = Math.random();
+                    char richt;
+
+                    if (rando < 1 / 4) {
+                        richt = 'N';
+                    } else if (rando < 2 / 4) {
+                        richt = 'O';
+                    } else if (rando < 3 / 4) {
+                        richt = 'S';
+                    } else {
+                        richt = 'W';
+                    }
+
+                    int pos;
+
+                    if (richt == 'N' || richt == 'S') {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 3);
+                    } else {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 2);
+                    }
+
+                    platzierer('J', pos, richt);
+                } else {
+                    double rando = Math.random();
+                    char richt;
+
+                    if (rando < 1 / 4) {
+                        richt = 'N';
+                    } else if (rando < 2 / 4) {
+                        richt = 'O';
+                    } else if (rando < 3 / 4) {
+                        richt = 'S';
+                    } else {
+                        richt = 'W';
+                    }
+
+                    int pos;
+
+                    if (richt == 'N' || richt == 'S') {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 3);
+                    } else {
+                        pos = blatt13.Zufall.zufallGanz(spielfeld.length - 2);
+                    }
+
+                    platzierer('L', pos, richt);
+                }
+
+                absturz();
+                reihenlöscher(3);
+                prüfer();
+            }
+            durchläufe++;
+            if (punkte < mindestpunkte) {
+                lebt = true;
+                spielfeld = MultiArrays.createEmpty2DCharArray(10, 40);
+                danny = new SchischVisualizer();
+                punkte = 0;
+            } else break;
+        }
+
+
+        for (int i = spielfeld[0].length-1; i >= 0; i--) {
+            for (int j = 0; j < spielfeld.length; j++) {
+                if (spielfeld[j][i] == ' ') {
+                    spielfeld[j][i] = '1';
+                }
+            }
+            danny.step(spielfeld);
+        }
+
+
+        for (int i = spielfeld[0].length-1; i >= 0; i--) {
+            for (int j = 0; j < spielfeld.length; j++) {
+                spielfeld[j][i] = '1';
+            }
+            danny.step(spielfeld);
+        }
+
 
 
         danny.start();
-        System.out.println("Euer Exzellenz haben " + punkte + " Punkte erreicht.");
+
+        long endzeit = System.nanoTime();
+        long gesamtzeit = endzeit - startzeit;
+
+
+        long stunden = gesamtzeit / 3_600_000_000_000L;
+        gesamtzeit %= 3_600_000_000_000L;
+
+        long minuten = gesamtzeit / 60_000_000_000L;
+        gesamtzeit %= 60_000_000_000L;
+
+        long sekunden = gesamtzeit / 1_000_000_000L;
+        gesamtzeit %= 1_000_000_000L;
+
+        long millis = gesamtzeit / 1_000_000L;
+        gesamtzeit %= 1_000_000L;
+
+        long mikros = gesamtzeit / 1_000L;
+        long nanos = gesamtzeit % 1_000L;
+
+
+
+        System.out.println("Euer Exzellenz haben nach " + durchläufe + " Durchläufen " + punkte + " Punkte erreicht.\n\n\nGesamtzeit:\n\n" + stunden + "\t\tStunden\n" + minuten + "\t\tMinuten\n" + sekunden + "\t\tSekunden\n" + millis + "\t\tMillisekunden\n" + mikros + "\t\tMikrosekunden\n" + nanos + "\t\tNanosekunden");
     }
 }
