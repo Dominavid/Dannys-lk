@@ -37,7 +37,6 @@ public class Steine {
         }
     }
 
-
     /**
      * zeichnet das O-Bauteil aus Tetris auf einem statischen Spielfeld
      * @param pos wo auf der X-Achse das Bauteil beginnen soll
@@ -53,7 +52,6 @@ public class Steine {
             koord = new int[][] {{pos, 0}, {pos+1, 0}, {pos, 1}, {pos+1, 1}};
         }
     }
-
 
     /**
      * zeichnet das T-Bauteil aus Tetris auf einem statischen Spielfeld
@@ -98,7 +96,6 @@ public class Steine {
         }
     }
 
-
     /**
      * zeichnet das S-Bauteil aus Tetris auf einem statischen Spielfeld
      * @param pos wo auf der X-Achse das Bauteil beginnen soll
@@ -126,7 +123,6 @@ public class Steine {
         }
     }
 
-
     /**
      * zeichnet das Z-Bauteil aus Tetris auf einem statischen Spielfeld
      * @param pos wo auf der X-Achse das Bauteil beginnen soll
@@ -153,7 +149,6 @@ public class Steine {
             }
         }
     }
-
 
     /**
      * zeichnet das J-Bauteil aus Tetris auf einem statischen Spielfeld
@@ -196,7 +191,6 @@ public class Steine {
             }
         }
     }
-
 
     /**
      * würde besser laufen wenn es ein Orange gäbe...
@@ -315,15 +309,22 @@ public class Steine {
     }
 
 
+    /**
+     * platziert einen stein und sucht gleichzeitig nach kollisionen mit bestehenden steinen, welche zum Tod des Spielers führen.
+     * statische Variablen: Spielfeld "spielfeld", Schischvisualiser "danny", abfrage ob spieler lebt "lebt" und koordinatenarray "koord"
+     * @param objekt welches objekt platziert werden soll (I/S/Z)
+     * @param pos wo das objekt anfangen gebaut zu werden
+     * @param vert ob es vertikal sein soll
+     */
     public static void platzierer(char objekt, int pos, boolean vert) {
 
         char[][] spielfeldkopie = MultiArrays.copy2DCharArray(spielfeld);
 
-        if (objekt == 'I') {
+        if (Character.toUpperCase(objekt) == 'I') {
             zeichneI(pos, vert);
-        } else if (objekt == 'S') {
+        } else if (Character.toUpperCase(objekt) == 'S') {
             zeichneS(pos, vert);
-        } else if (objekt == 'Z') {
+        } else if (Character.toUpperCase(objekt) == 'Z') {
             zeichneZ(pos, vert);
         } else {
             System.out.println("Schere: Eingabe fehlerhaft");
@@ -337,15 +338,22 @@ public class Steine {
     }
 
 
+    /**
+     * platziert einen stein und sucht gleichzeitig nach k
+     * Arbeitet mit statischen Spielfeld "spielfeld", Schi
+     * @param objekt welches objekt platziert werden soll
+     * @param pos wo das objekt anfangen gebaut zu werden
+     * @param richt in welche richtung es zeigen soll (N/O/S/W)
+     */
     public static void platzierer(char objekt, int pos, char richt) {
 
         char[][] spielfeldkopie = MultiArrays.copy2DCharArray(spielfeld);
 
-        if (objekt == 'T') {
+        if (Character.toUpperCase(objekt) == 'T') {
             zeichneT(pos, richt);
-        } else if (objekt == 'J') {
+        } else if (Character.toUpperCase(objekt) == 'J') {
             zeichneJ(pos, richt);
-        } else if (objekt == 'L') {
+        } else if (Character.toUpperCase(objekt) == 'L') {
             zeichneL(pos, richt);
         } else {
             System.out.println("Schere: Eingabe fehlerhaft");
@@ -358,11 +366,17 @@ public class Steine {
     }
 
 
+    /**
+     * platziert einen stein und sucht gleichzeitig nach kollisionen mit bestehenden steinen, welche zum Tod des Spielers führen.
+     * statische Variablen: Spielfeld "spielfeld", Schischvisualiser "danny", abfrage ob spieler lebt "lebt" und koordinatenarray "koord"
+     * @param objekt welches objekt platziert werden soll (I/S/Z)
+     * @param pos wo das objekt anfangen gebaut zu werden
+     */
     public static void platzierer(char objekt, int pos) {
 
         char[][] spielfeldkopie = MultiArrays.copy2DCharArray(spielfeld);
 
-        if (objekt == 'O') {
+        if (Character.toUpperCase(objekt) == 'O') {
             zeichneO(pos);
         } else {
             System.out.println("Schere: Eingabe fehlerhaft");
@@ -375,6 +389,10 @@ public class Steine {
     }
 
 
+    /**
+     * lässt ein Objekt härter abstürzen als meine Mathenote in der 8. Klasse
+     * statische Variablen: Spielfeld "spielfeld", Schischvisualiser "danny" und koordinatenarray "koord"
+     */
     public static void absturz() {
         int[][] koordkopie = new int[koord.length][];
 
@@ -419,7 +437,10 @@ public class Steine {
     }
 
 
-
+    /**
+     * prüft ob sich steine in der obersten Reihe befinden (was wie ich gerade geChatGPTt habe absolut überflüssig ist.
+     * statische Variablen: Spielfeld "spielfeld" und abfrage ob spieler lebt "lebt"
+     */
     public static void prüfer() {
         for (int j = 0; j < koord.length; j++) {
             if (spielfeld[j][0] != ' ') {
@@ -440,7 +461,7 @@ public class Steine {
         int durchläufe = 0;
 
 
-        int mindestpunkte = 20;
+        int mindestpunkte = 80;
 
 
         while (true) {
@@ -547,7 +568,7 @@ public class Steine {
 
                 absturz();
                 reihenlöscher(3);
-                prüfer();
+                //prüfer();
             }
             durchläufe++;
             if (punkte < mindestpunkte) {
