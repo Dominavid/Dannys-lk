@@ -4,6 +4,7 @@ import schisch_visualizer.SchischVisualizer;
 
 public class GameOfLife {
     static char[][] spielfeld = new char[100][100];
+    static boolean lüppt = true;
 
 
 
@@ -21,17 +22,23 @@ public class GameOfLife {
 
 
     public static void weiter() {
-        char[][] spielfeldkopie = new char[spielfeld.length][spielfeld[0].length];
+        char[][] spielfeldkopie = blatt14.MultiArrays.copy2DCharArray(spielfeld);
+
         for (int i = 0; i < spielfeld.length; i++) {
             for (int j = 0; j < spielfeld[i].length; j++) {
-                if (spielfeld[i][j] == '0') {
-                    if (blatt14.Simulationen.zaehlenAcht(spielfeld, i, j, '0', false) == 3) {
-                        spielfeldkopie[i][j] = '1';
+                int nachbarn1 = blatt14.Simulationen.zaehlenAcht(spielfeldkopie, i, j, '1', false);
+                if (spielfeldkopie[i][j] == '0') {
+                    if (blatt14.Simulationen.zaehlenAcht(spielfeldkopie, i, j, '0', false) == 3) {
+                        spielfeld[i][j] = '1';
                     }
-                } else if (blatt14.Simulationen.zaehlenAcht(spielfeld, i, j, '1', false) < 2) {
-                    spielfeldkopie[i][j] = '0';
+                } else if (nachbarn1 < 2 || nachbarn1 > 3) {
+                    spielfeld[i][j] = '0';
                 }
             }
+        }
+
+        if (spielfeldkopie == spielfeld) {
+            lüppt = false;
         }
     }
 
@@ -39,6 +46,20 @@ public class GameOfLife {
         SchischVisualizer danny = new SchischVisualizer();
         initRandom(0.05);
         danny.step(spielfeld);
+
+        for (int i = 0; i < 100; i++) {
+            weiter();
+            danny.step(spielfeld);
+            if (!lüppt) {
+                break;
+            }
+        }
+
+        /*while (lüppt) {
+            weiter();
+            danny.step(spielfeld);
+        }*/
+
         danny.start();
     }
 }
