@@ -392,12 +392,12 @@ public class Simulationen {
      * @param rand ob über den rand hinweggeblickt wird
      * @return wie oft sich das feld neben der position befindet
      */
-    public static int zaehlenVier(char[][] charr, int x, int y, char ziel, boolean rand) {
+    public static byte zaehlenVier(char[][] charr, int x, int y, char ziel, boolean rand) {
         if (ziel == '§') {
             System.out.println("Das ist mein error symbol du dödel");
             return -1;
         }
-        int z = 0;
+        byte z = 0;
         if (x >= charr.length || y >= charr[x].length) {
             System.out.println("Koordinaten ungültig");
             return -1;
@@ -429,12 +429,12 @@ public class Simulationen {
      * @param rand ob über den rand hinweggeblickt wird
      * @return wie oft sich das feld um der position herum befindet
      */
-    public static int zaehlenAcht(char[][] charr, int x, int y, char ziel, boolean rand) {
+    public static byte zaehlenAcht(char[][] charr, int x, int y, char ziel, boolean rand) {
         if (ziel == '§') {
             System.out.println("Das ist mein error symbol du dödel");
             return -1;
         }
-        int z = 0;
+        byte z = 0;
         if (x >= charr.length || y >= charr[x].length) {
             System.out.println("Koordinaten ungültig");
             return -1;

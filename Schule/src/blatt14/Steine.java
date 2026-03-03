@@ -85,7 +85,7 @@ public class Steine {
                     spielfeld[i][0] = 'C';
                     koord[i+1-pos] = new int[] {i, 0};
                 }
-            } else if (richt == 'W') {
+            } else {
                 spielfeld[pos][1] = 'C';
                 koord[0] = new int[] {pos, 1};
                 for (int i = 0; i < 3; i++) {
@@ -181,7 +181,7 @@ public class Steine {
                     spielfeld[i][0] = '2';
                     koord[i+1-pos] = new int[] {i, 0};
                 }
-            } else if (richt == 'W') {
+            } else {
                 spielfeld[pos][2] = '2';
                 koord[0] = new int[] {pos, 2};
                 for (int i = 0; i < 3; i++) {
@@ -223,7 +223,7 @@ public class Steine {
                     spielfeld[i][0] = '4';
                     koord[i+1-pos] = new int[] {i, 0};
                 }
-            } else if (richt == 'W') {
+            } else {
                 spielfeld[pos][0] = '4';
                 koord[0] = new int[] {pos, 0};
                 for (int i = 0; i < 3; i++) {
@@ -331,7 +331,10 @@ public class Steine {
         }
 
         for (int j = 0; j < koord.length; j++) {
-            if (spielfeldkopie[koord[j][0]][koord[j][1]] != ' ') lebt = false;
+            if (spielfeldkopie[koord[j][0]][koord[j][1]] != ' ') {
+                lebt = false;
+                break;
+            }
         }
 
         danny.step(spielfeld);
@@ -360,7 +363,10 @@ public class Steine {
         }
 
         for (int j = 0; j < koord.length; j++) {
-            if (spielfeldkopie[koord[j][0]][koord[j][1]] != ' ') lebt = false;
+            if (spielfeldkopie[koord[j][0]][koord[j][1]] != ' ') {
+                lebt = false;
+                break;
+            }
         }
         danny.step(spielfeld);
     }
@@ -383,7 +389,10 @@ public class Steine {
         }
 
         for (int j = 0; j < koord.length; j++) {
-            if (spielfeldkopie[koord[j][0]][koord[j][1]] != ' ') lebt = false;
+            if (spielfeldkopie[koord[j][0]][koord[j][1]] != ' ') {
+                lebt = false;
+                break;
+            }
         }
         danny.step(spielfeld);
     }
@@ -482,11 +491,11 @@ public class Steine {
                     double rando = Math.random();
                     char richt;
 
-                    if (rando < 1 / 4) {
+                    if (rando < 1.0 / 4) {
                         richt = 'N';
-                    } else if (rando < 2 / 4) {
+                    } else if (rando < 2.0 / 4) {
                         richt = 'O';
-                    } else if (rando < 3 / 4) {
+                    } else if (rando < 3.0 / 4) {
                         richt = 'S';
                     } else {
                         richt = 'W';
@@ -522,11 +531,11 @@ public class Steine {
                     double rando = Math.random();
                     char richt;
 
-                    if (rando < 1 / 4) {
+                    if (rando < 1.0 / 4) {
                         richt = 'N';
-                    } else if (rando < 2 / 4) {
+                    } else if (rando < 2.0 / 4) {
                         richt = 'O';
-                    } else if (rando < 3 / 4) {
+                    } else if (rando < 3.0 / 4) {
                         richt = 'S';
                     } else {
                         richt = 'W';
@@ -545,11 +554,11 @@ public class Steine {
                     double rando = Math.random();
                     char richt;
 
-                    if (rando < 1 / 4) {
+                    if (rando < 1.0 / 4) {
                         richt = 'N';
-                    } else if (rando < 2 / 4) {
+                    } else if (rando < 2.0 / 4) {
                         richt = 'O';
-                    } else if (rando < 3 / 4) {
+                    } else if (rando < 3.0 / 4) {
                         richt = 'S';
                     } else {
                         richt = 'W';
