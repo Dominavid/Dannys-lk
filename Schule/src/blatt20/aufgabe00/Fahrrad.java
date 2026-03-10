@@ -46,7 +46,7 @@ public class Fahrrad {
 
     public void schalten(Scanner sc) {
         System.out.println("Gang vorne:\t" + this.gangvorne[this.genutztesfahrrad][0] + " von " + this.gangvorne[this.genutztesfahrrad][1] + "\nGewünschten Gang eingeben:");
-        byte gang
+        //byte gang
     }
 
 
