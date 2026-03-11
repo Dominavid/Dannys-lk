@@ -32,6 +32,8 @@ public class Fahrrad {
                 this.geschwindigkeit[this.genutztesfahrrad] += (byte)(0.8 * (((double)this.gangvorne[this.genutztesfahrrad][0]) / 2) * this.ganghinten[this.genutztesfahrrad][0]);
             } else if (strampel.equals("gar nicht")) {
                 break;
+            } else if (strampel.equals("schalten")) {
+                //todo
             }
         }
 
@@ -46,7 +48,10 @@ public class Fahrrad {
 
     public void schalten(Scanner sc) {
         System.out.println("Gang vorne:\t" + this.gangvorne[this.genutztesfahrrad][0] + " von " + this.gangvorne[this.genutztesfahrrad][1] + "\nGewünschten Gang eingeben:");
-        //byte gang
+        byte gang = sc.nextByte();
+        if (gang > this.gangvorne[this.genutztesfahrrad][1] || gang < 0.0F) {
+            System.out.println("Fehlerhafte Angaben");
+        }
     }
 
 
