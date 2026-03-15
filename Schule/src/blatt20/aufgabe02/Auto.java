@@ -9,10 +9,6 @@ public class Auto {
 
 
 
-    public Auto(Auto brummbrumm) {
-        this.marke = brummbrumm.marke;
-        this.modell =
-    }
 
 
     void beschleunigung(int v) {
