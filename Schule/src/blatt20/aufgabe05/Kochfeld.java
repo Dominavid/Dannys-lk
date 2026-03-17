@@ -1,4 +1,4 @@
-package blatt20.aufgabe04;
+package blatt20.aufgabe05;
 
 public class Kochfeld {
     byte hitzestufe;
