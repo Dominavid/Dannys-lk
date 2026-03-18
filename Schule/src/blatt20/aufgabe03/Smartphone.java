@@ -7,7 +7,7 @@ public class Smartphone {
     private byte kameras;
     private byte bildschirmgröße;
     private short[] auflösung;
-    private short speichergb;
+    private long speichergb;
     private short preis;
     private String betriebsystem;
 
@@ -16,7 +16,7 @@ public class Smartphone {
     private byte akku;
 
 
-    public Smartphone(String marke, String modell, String chip, byte kameras, byte bildschirmgröße, byte akku, short auflösungx, short auflösungy, short speichergb, short preis, byte helligkeit, byte lautstärke, String betriebsystem) {
+    public Smartphone(String marke, String modell, String chip, byte kameras, byte bildschirmgröße, byte akku, short auflösungx, short auflösungy, long speichergb, short preis, byte helligkeit, byte lautstärke, String betriebsystem) {
         if (kameras < 0) {
             System.out.println("Wie soll ein Handy " + kameras + " Kameras haben du kek?");
             kameras = 0;
@@ -71,7 +71,44 @@ public class Smartphone {
         if (this.speichergb < 0) this.speichergb = 0;
     }
 
-    void setMarke(String marke) {
+    public void setMarke(String marke) {
         this.marke = marke;
+    }
+
+    public String getMarke() {
+        return this.marke;
+    }
+
+    public void setModell(String modell) {
+        this.modell = modell;
+    }
+
+    public String getModell() {
+        return this.modell;
+    }
+
+    public void setChip(String chip) {
+        this.chip = chip;
+    }
+
+    public String getChip() {
+        return this.chip;
+    }
+
+    public void setKameras(byte kameras) {
+        if (kameras < 0) {
+            System.out.println("Wie soll ein Handy " + kameras + " Kameras haben du kek?");
+            return;
+        }
+        this.kameras = kameras;
+    }
+
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || !(obj instanceof Smartphone)) {
+            return false;
+        }
+        Smartphone smartphone = (Smartphone) obj;
+        return this.marke.equals(smartphone.marke) && this.modell.equals(smartphone.modell);
     }
 }

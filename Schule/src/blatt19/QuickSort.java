@@ -18,7 +18,7 @@ public class QuickSort {
 
 
     public static void main(String[] args) {
-        if (System.getProperty("user.name") == "TimoDorn") {
+        if (System.getProperty("user.name").equals("TimoDorn")) {
             System.out.println("Hallo, Dino!");
         } else {
             boolean ausgestorben = true;
