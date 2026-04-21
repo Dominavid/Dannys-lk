@@ -10,7 +10,7 @@ public enum Abonnement {
     SCHWARZER((short)24.99, (short)700);
 
 
-    final short ppM;
+    final short ppM; //papier pro Monat
     final short drucken;
 
     Abonnement(short ppM, short drucken) {
