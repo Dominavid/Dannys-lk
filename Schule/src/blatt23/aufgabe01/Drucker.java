@@ -16,6 +16,7 @@ public class Drucker {
     private short tintefarbe;
     private short tinteschwarzweiß;
     private boolean piS; //papier in Scanner
+    private short aufträge;
 
 
     public Drucker(Abonnement abo) {
@@ -30,6 +31,7 @@ public class Drucker {
         this.tintefarbe = 1000;
         this.tinteschwarzweiß = 1000;
         this.piS = false;
+        this.aufträge = 0;
 
         this.sdM = abonnement.ppM;
     }
@@ -77,7 +79,13 @@ public class Drucker {
             System.out.println("\"Er hat sich stets bemüht.\"\n\n-Jeder deiner Lehrer");
         }
     }
-    public void wartungsschachtZu //todo: weiter
+    public void wartungsschachtZu() {
+        if (this.gerätemodus != Gerätemodus.WARTUNG) {
+            System.out.printf("Schere: Wartungsschacht ist zu.");
+        } else {
+            this.gerätemodus = Gerätemodus.STANDBY;
+        }
+    }
     public Abonnement getAbonnement() {
         return abonnement;
     }
@@ -160,6 +168,9 @@ public class Drucker {
     public void entferneVonGlas() {
         this.piS = false;
     }
+    public short getAufträge() {
+        return this.abonnement.ppM;
+    }
 
     //getter und setter zu ende
 
@@ -189,6 +200,22 @@ public class Drucker {
         } else {
             System.out.println("Schere, da ist noch kein Blatt");
         }
+    }
+
+    public Druckaufträge drucken(int anzahlseiten) {
+        if (anzahlseiten <= 0) {
+            System.out.println("Schere: kein negatives Drucken möglich.");
+            return null;
+        }
+        if (gerätemodus != Gerätemodus.STANDBY) {
+            System.out.println("Schere: Gerätemodus ist nicht standby.");
+            return null;
+        }
+        if (ssI >= 20) {
+            System.out.println("Mach mal internet an du Lauch");
+        }
+
+        return new Druckaufträge(aufträge, (short)anzahlseiten, this.druckmodus, this.druckart, this.tintefarbe, this.tinteschwarzweiß);
     }
 
 }
