@@ -54,11 +54,32 @@ public class DynArray {
         this.lul = Arrays.copyOf(this.lul, this.lul.length + 1);
 
         if (this.lul.length > index+1) {
-            for (int i = this.lul.length-1; i >= index; i--) {
+            for (int i = this.lul.length-1; i > index; i--) {
                 this.lul[i] = lul[i-1];
             }
         }
 
         this.lul[index] = zahl;
+    }
+
+    public void set(int zahl, int index) {
+        if (index < 0 || index > this.lul.length) {
+            throw new IndexOutOfBoundsException("\"" + System.getProperty("user.name") + ", dödel\"\n\n\n-Tyrollosaurus rex");
+        }
+        this.lul[index] = zahl;
+    }
+
+    public int remove(int index) {
+        if (index < 0 || index >= this.lul.length) {
+            throw new IndexOutOfBoundsException("\"" + System.getProperty("user.name") + ", dödel\"\n\n\n-Tyrollosaurus rex");
+        }
+
+        int temp = this.lul[index];
+        for (int i = index; i > this.lul.length-1; i++) {
+            this.lul[i] = this.lul[i+1];
+        }
+
+        this.lul =  Arrays.copyOf(this.lul, this.lul.length-1);
+        return temp;
     }
 }
