@@ -82,4 +82,10 @@ public class DynArray {
         this.lul =  Arrays.copyOf(this.lul, this.lul.length-1);
         return temp;
     }
+
+    public void clear() {
+        this.lul = new int[0];
+    }
+
+    //kein gettersetter weil ja die methoden alles machen
 }
