@@ -16,7 +16,7 @@ public class test {
         String lul = sc.nextLine();
         long endzeit = System.nanoTime();
 
-        if (endzeit - startzeit > 2500000000L && endzeit - startzeit < 3500000000L) {
+        if (endzeit - startzeit > 2750000000L && endzeit - startzeit < 3250000000L) {
             System.out.println("Herzlichen Glückwunsch! Der Drucker ist wieder heile (:");
         } else {
             System.out.println("\"Er hat sich stets bemüht.\"\n\n-Jeder deiner Lehrer");
