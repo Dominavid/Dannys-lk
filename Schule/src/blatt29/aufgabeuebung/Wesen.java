@@ -72,4 +72,10 @@ public class Wesen {
         if (geschwindigkeit <= 0) throw new IllegalArgumentException("geschwindigkeit <= 0");
         this.geschwindigkeit = geschwindigkeit;
     }
+
+
+
+    public void angreifen(Wesen ziel) {
+
+    }
 }
