@@ -1,7 +1,5 @@
 package blatt29.aufgabe02;
 
-import blatt20.aufgabe03.Smartphone;
-
 public class Node {
     Object data;
     private Node next;
