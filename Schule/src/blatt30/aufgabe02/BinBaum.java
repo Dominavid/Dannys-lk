@@ -61,7 +61,21 @@ public class BinBaum {
     }
 
 
-    //todo: findInOrderNeighbour
+    public Node[] findInOrderNeighbour(Node start) {
+        Node current = start;
+        Node[] zarr = new Node[2];
+        if (current.getLeft() != null) current = current.getLeft();
+        while (current.getRight() != null) {
+            current = current.getRight();
+        }
+        zarr[0] = current;
+        if (current.getRight() != null) current = current.getRight();
+        while (current.getLeft() != null) {
+            current = current.getLeft();
+        }
+        zarr[1] = current;
+        return zarr;
+    }
 
 
     public Node remove(int ziel) {
@@ -71,12 +85,33 @@ public class BinBaum {
             return null;
         }
         if (current.getLeft() == null && current.getRight() == null) {
-            if (current.getPapa() == current) {
-                current.setLeft(null);
+            if (current.getPapa().getRight() == current) {
+                current.getPapa().setRight(null);
             } else {
-                current.setRight(null);
+                current.getPapa().setLeft(null);
             }
-            //todo:zu ende machen
+            return current;
         }
+        if (current.getLeft() == null) {
+            if (current.getPapa().getRight() == current) {
+                current.getPapa().setRight(current.getRight());
+            } else {
+                current.getPapa().setLeft(current.getRight());
+            }
+            return current;
+        }
+        if (current.getRight() == null) {
+            if (current.getPapa().getLeft() == current) {
+                current.getPapa().setLeft(current.getLeft());
+            } else {
+                current.getPapa().setRight(current.getLeft());
+            }
+            return current;
+        }
+        //todo: auf beiden seiten gibts was
+        return null;
     }
+
+
+
 }
