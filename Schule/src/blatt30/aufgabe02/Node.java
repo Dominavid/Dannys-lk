@@ -51,4 +51,6 @@ public class Node {
     public void setLeft(Node left) {
         this.left = left;
     }
+
+    //todo: dieser komische i)
 }

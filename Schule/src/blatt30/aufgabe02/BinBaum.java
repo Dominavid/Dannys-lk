@@ -113,5 +113,29 @@ public class BinBaum {
     }
 
 
+    public int depth(Node start) {
+        if (start == null) {
+            return 0;
+        }
+        return 1 + Math.max(depth(start.getLeft()), depth(start.getRight()));
+    }
 
+
+    public int count(Node start) {
+        if (start == null) {
+            return 0;
+        }
+        return 1 + count(start.getLeft()) + count(start.getRight());
+    }
+
+
+    public int[] toArray() {
+        int[] arr = new int[count(root)];
+
+        arr[0] = root.getData();
+
+        //todo: kein plan wie die scheiße geht
+
+        return arr;
+    }
 }
