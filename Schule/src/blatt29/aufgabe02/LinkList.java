@@ -67,4 +67,8 @@ public class LinkList {
             throw new IndexOutOfBoundsException("\"" + System.getProperty("user.name") + ", dödel\"\n\n\n-Tyrollosaurus rex");
         }
     }
+
+    public void clear() {
+        this.head = null;
+    }
 }
