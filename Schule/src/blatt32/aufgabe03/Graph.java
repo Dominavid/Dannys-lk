@@ -11,6 +11,9 @@ public class Graph {
     }
 
 
+    /**
+     * fügt einen knoten hinzu (ohne verbindungen)
+     */
     public void addVertex() {
         int [][] tempdino = new int[this.dino.length+1][this.dino[0].length+1];
         for (int i = 0; i < this.dino.length-1; i++) {
@@ -24,7 +27,20 @@ public class Graph {
         }
         this.dino = tempdino;
     }
+
+    /**
+     * fügt eine kante hinzu
+     * @param i Startindex
+     * @param j endindex
+     * @param weight gewichtung
+     * @param directed ob die kante gerichtet ist
+     */
     public void addEdge(int i, int j, int weight, boolean directed) {
+        if (weight <= 0) {
+            System.out.println("Gewicht darf nicht weniger als 1 sein");
+            weight = 1;
+        }
+        if (i >=)//todo
         this.dino[i][j] = weight;
         if (!directed) {
             this.dino[j][i] = weight;
@@ -56,8 +72,14 @@ public class Graph {
     public boolean isDirected() {
         for (int i = 0; i < this.dino.length; i++) {
             for (int j = i; j < this.dino[i].length; j++) {
-                if (this.dino[i][j] == this.dino[j][i]) {}//todo
+                if (this.dino[i][j] != this.dino[j][i]) {
+                    return false;
+                }
             }
         }
+        return true;
+    }
+    public int[][] getDinoMatrix() {
+        return this.dino;
     }
 }
