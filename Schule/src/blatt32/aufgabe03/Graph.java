@@ -1,5 +1,10 @@
 package blatt32.aufgabe03;
 
+//import java.util.Arrays;
+
+import java.io.File;
+import java.io.FileWriter;
+
 public class Graph {
     private int[][] dino;
 
@@ -40,25 +45,56 @@ public class Graph {
             System.out.println("Gewicht darf nicht weniger als 1 sein");
             weight = 1;
         }
-        if (i >=)//todo
+        if (i >= this.dino.length || j >= this.dino.length || i <= 0 || j <= 0) {
+            throw new ArrayIndexOutOfBoundsException("ungültige indexe");
+        }
         this.dino[i][j] = weight;
         if (!directed) {
             this.dino[j][i] = weight;
         }
     }
+
+    /**
+     * fügt eine ungerichtete kante hinzu
+     * @param i startindex
+     * @param j endindex
+     * @param weight gewichtung
+     */
     public void addEdge(int i, int j, int weight) {
         this.addEdge(i, j, weight, false);
     }
+
+    /**
+     * fügt eine kante hinzu und setzt das gewicht automatisch auf 1
+     * @param i startindex
+     * @param j endindex
+     * @param directed ob die kante gerichtet ist
+     */
     public void addEdge(int i, int j, boolean directed) {
         this.addEdge(i, j, 1, directed);
     }
+
+    /**
+     * fügt eine ungewichtete und ungerichtete kante hinzu
+     * @param i startindex
+     * @param j endindex
+     */
     public void addEdge(int i, int j) {
         this.addEdge(i, j, 1, false);
     }
 
+    /**
+     * ruft die anzahl der knoten ab
+     * @return die anzahl der knoten als int
+     */
     public int size() {
         return this.dino.length;
     }
+
+    /**
+     * durchsucht den graph nach gewichtung
+     * @return ob der graph gewichtet ist
+     */
     public boolean isWeighted() {
         for (int i = 0; i < this.dino.length; i++) {
             for (int j = 0; j < this.dino[i].length; j++) {
@@ -69,6 +105,11 @@ public class Graph {
         }
         return false;
     }
+
+    /**
+     * durchsucht den graph nach gerichtetheit
+     * @return ob der graph (oder teile davon) gerichtet ist
+     */
     public boolean isDirected() {
         for (int i = 0; i < this.dino.length; i++) {
             for (int j = i; j < this.dino[i].length; j++) {
@@ -79,7 +120,64 @@ public class Graph {
         }
         return true;
     }
+
+    /**
+     * gibt die dinomatrix aus
+     * @return dinomatrix als 2D int array
+     */
     public int[][] getDinoMatrix() {
         return this.dino;
+    }
+
+    /**
+     * findet alle erreichbaren Nachbarn eines Knotens
+     * @param i welcher Knoten
+     * @return sortierte Liste der erreichbaren nachbarn als int array
+     */
+    public int[] getNeighbors(int i) {
+        int m = 0;
+        for (int j = 0; j < this.dino[i].length; j++) {
+            if (this.dino[i][j] >= 1) {
+                m++;
+            }
+        }
+        if (m == 0) {
+            System.out.println("Keine Nachbarn gefunden");
+            return new int[0];
+        }
+        int[] arr = new int[m];
+        m = 0;
+        for (int j = 0; j < this.dino[i].length; j++) {
+            if (this.dino[i][j] >= 1) {
+                arr[m] = j;
+                m++;
+            }
+        }
+        //Arrays.sort(arr);
+        return arr;
+    }
+
+    public File exportHTML() {
+        File file = new File("dinomatrix.html");
+
+       StringBuilder dinocode = new StringBuilder();
+
+       dinocode.append("<tr>\n\t<th></th>");
+       for (int i = 0; i < this.dino.length; i++) {
+           dinocode.append("\n<th>" + (i+1) + "</th>\n");//todo: beten das ich es einiggermaßen wieder aufgreifen kann
+       }
+
+        for (int i = 0; i < this.dino.length; i++) {
+            dinocode.append("<tr>\n\t<");
+            for (int j = 0; j < this.dino[i].length; j++) {}
+        }
+
+        try {
+            FileWriter fr = new FileWriter(file);
+            fr.write("<>");
+            fr.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
