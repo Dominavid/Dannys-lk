@@ -158,26 +158,32 @@ public class Graph {
     }
 
     public File exportHTML() {
-        File file = new File("dinomatrix.html");
+        File dinofile = new File("dinomatrix.html");
 
-       StringBuilder dinocode = new StringBuilder();
+        StringBuilder dinocode = new StringBuilder();
 
-       dinocode.append("<tr>\n\t<th></th>");
-       for (int i = 0; i < this.dino.length; i++) {
-           dinocode.append("\n<th>" + (i+1) + "</th>\n");//todo: beten das ich es einiggermaßen wieder aufgreifen kann
-       }
+        dinocode.append("<tr>\n\t<th></th>");
+        for (int i = 0; i < this.dino.length; i++) {
+           dinocode.append("\n<th>" + (i+1) + "</th>\n");//todo: in dinonuggets testen
+        } //überschrift müsste fertig sein
+         dinocode.append("\n</tr>\n");
 
         for (int i = 0; i < this.dino.length; i++) {
-            dinocode.append("<tr>\n\t<");
-            for (int j = 0; j < this.dino[i].length; j++) {}
+            dinocode.append("<tr>\n<th>" + (i+1) + "</th>\n");
+            for (int j = 0; j < this.dino[i].length; j++) {
+                dinocode.append("<td>" + this.dino[i][j] + "</td>\n");
+            }
+            dinocode.append("\n</tr>\n");
         }
 
+
         try {
-            FileWriter fr = new FileWriter(file);
-            fr.write("<>");
+            FileWriter fr = new FileWriter(dinofile);
+            fr.write(dinocode.toString());
             fr.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return dinofile;
     }
 }
