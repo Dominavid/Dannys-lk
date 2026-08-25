@@ -24,19 +24,21 @@ public class Dinonuggets {
 
         StringBuilder dinocode = new StringBuilder();
 
-        dinocode.append("<tr>\n\t<th></th>");
+        dinocode.append("<table>\n\t<tr>\n\t\t<th></th>");
         for (int i = 0; i < dino.length; i++) {
-            dinocode.append("\n<th>" + (i+1) + "</th>\n");//todo: beten das ich es einiggermaßen wieder aufgreifen kann
+            dinocode.append("\n\t\t<th>" + (i+1) + "</th>");//todo: beten das ich es einiggermaßen wieder aufgreifen kann
         } //überschrift müsste fertig sein
-        dinocode.append("\n</tr>\n");
+        dinocode.append("\n\t</tr>\n\n");
 
         for (int i = 0; i < dino.length; i++) {
-            dinocode.append("<tr>\n<th>" + (i+1) + "</th>\n");
+            dinocode.append("\t<tr>\n\t\t<th>" + (i+1) + "</th>\n");
             for (int j = 0; j < dino[i].length; j++) {
-                dinocode.append("<td>" + dino[i][j] + "</td>\n");
+                dinocode.append("\t\t<td>" + dino[i][j] + "</td>\n");
             }
-            dinocode.append("\n</tr>\n");
+            dinocode.append("\t</tr>\n\n");
         }
+
+        dinocode.append("</table>\n\n");
 
 
         try {
@@ -47,6 +49,7 @@ public class Dinonuggets {
             e.printStackTrace();
         }
 
-        dinofile.//todo: testen
+
+        System.out.println("lul");
     }
 }
