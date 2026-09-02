@@ -168,7 +168,7 @@ public class Graph {
 
         dinocode.append("<table>\n\t<tr>\n\t\t<th></th>");
         for (int i = 0; i < this.dino.length; i++) {
-            dinocode.append("\n\t\t<th>" + (i+1) + "</th>");//todo: beten das ich es einiggermaßen wieder aufgreifen kann
+            dinocode.append("\n\t\t<th>" + (i+1) + "</th>");
         } //überschrift müsste fertig sein
         dinocode.append("\n\t</tr>\n\n");
 
@@ -193,5 +193,26 @@ public class Graph {
         return dinofile;
     }
 
-    //todo:dieses mit den textdateien
+    public void importGraph(File dinofile) {}
+
+    public File exportGraph() {
+        File dinofile = new File("dinomatrix.txt");
+
+        StringBuilder dinograph = new StringBuilder();
+
+        dinograph.append("\t");
+
+        for (int i = 0; i < this.dino.length; i++) {
+            dinograph.append((i + 1) + "\t");
+        }
+
+        for (int i = 0; i < this.dino.length; i++) {
+            dinograph.append("\n" + (i+1) + "\t");
+            for (int j = 0; j < this.dino[i].length; j++) {
+                dinocode.append("\t\t<td>" + this.dino[i][j] + "</td>\n");
+            } //todo: weitermachen
+            dinocode.append("\t</tr>\n\n");
+        }
+
+        dinocode.append("</table>\n\n");    }
 }
